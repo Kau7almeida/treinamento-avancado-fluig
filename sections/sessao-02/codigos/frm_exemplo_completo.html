@@ -1,0 +1,203 @@
+<!--
+    frm_exemplo_completo_style_guide.html
+    Sessão 02 — Gabarito do exercício (NÃO mostrar antes da turma tentar!)
+    Treinamento Avançado | JYNX
+
+    Componentes utilizados (10 no total):
+    1. Panel (agrupamento)
+    2. Grid (col-md-*)
+    3. Input text + email + date
+    4. Select
+    5. Textarea
+    6. Checkbox
+    7. Radio
+    8. Table (table-striped table-hover)
+    9. Alert (alert-info)
+    10. Buttons (primary, default, danger)
+-->
+
+<div class="fluig-style-guide" style="padding: 20px;">
+
+    <!-- PAINEL 1: Dados do Solicitante -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Dados do Solicitante</h3>
+        </div>
+        <div class="panel-body">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="solicitante">Nome do Solicitante</label>
+                        <input type="text" class="form-control"
+                               id="solicitante" name="solicitante"
+                               placeholder="Nome completo">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="matricula">Matrícula</label>
+                        <input type="text" class="form-control"
+                               id="matricula" name="matricula"
+                               placeholder="000000">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="data_solicitacao">Data</label>
+                        <input type="date" class="form-control"
+                               id="data_solicitacao" name="data_solicitacao">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="departamento">Departamento</label>
+                        <select class="form-control"
+                                id="departamento" name="departamento">
+                            <option value="">Selecione...</option>
+                            <option value="TI">TI</option>
+                            <option value="RH">Recursos Humanos</option>
+                            <option value="FIN">Financeiro</option>
+                            <option value="COM">Compras</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="email_solicitante">E-mail</label>
+                        <input type="email" class="form-control"
+                               id="email_solicitante" name="email_solicitante"
+                               placeholder="email@empresa.com">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="ramal">Ramal</label>
+                        <input type="text" class="form-control"
+                               id="ramal" name="ramal"
+                               placeholder="0000">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prioridade com Radio -->
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Prioridade</label><br>
+                    <label class="radio-inline">
+                        <input type="radio" name="prioridade" value="baixa"> Baixa
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="prioridade" value="normal" checked> Normal
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="prioridade" value="alta"> Alta
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="prioridade" value="critica"> Crítica
+                    </label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- PAINEL 2: Itens Solicitados (Tabela) -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Itens Solicitados</h3>
+        </div>
+        <div class="panel-body">
+
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th style="width: 10%;">#</th>
+                        <th style="width: 40%;">Descrição do Item</th>
+                        <th style="width: 15%;">Quantidade</th>
+                        <th style="width: 20%;">Valor Unitário</th>
+                        <th style="width: 15%;">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><input type="text" class="form-control input-sm"
+                                   name="item_desc_1" placeholder="Descrição"></td>
+                        <td><input type="number" class="form-control input-sm"
+                                   name="item_qtd_1" value="1"></td>
+                        <td><input type="text" class="form-control input-sm"
+                                   name="item_valor_1" placeholder="0,00"></td>
+                        <td><input type="text" class="form-control input-sm"
+                                   name="item_subtotal_1" readonly
+                                   placeholder="0,00"></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><input type="text" class="form-control input-sm"
+                                   name="item_desc_2" placeholder="Descrição"></td>
+                        <td><input type="number" class="form-control input-sm"
+                                   name="item_qtd_2" value="1"></td>
+                        <td><input type="text" class="form-control input-sm"
+                                   name="item_valor_2" placeholder="0,00"></td>
+                        <td><input type="text" class="form-control input-sm"
+                                   name="item_subtotal_2" readonly
+                                   placeholder="0,00"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Alerta informativo -->
+            <div class="alert alert-info">
+                <strong>Nota:</strong> Na próxima sessão, vamos tornar
+                esta tabela dinâmica — com botões para adicionar e remover linhas!
+            </div>
+
+        </div>
+    </div>
+
+    <!-- PAINEL 3: Observações -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Observações e Justificativa</h3>
+        </div>
+        <div class="panel-body">
+
+            <div class="form-group">
+                <label for="justificativa">Justificativa da Solicitação</label>
+                <textarea class="form-control" id="justificativa"
+                          name="justificativa" rows="4"
+                          placeholder="Descreva o motivo da solicitação..."></textarea>
+            </div>
+
+            <!-- Checkbox -->
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="urgente" value="S">
+                    Esta solicitação é <strong>urgente</strong> e
+                    precisa de aprovação imediata
+                </label>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- BOTÕES DE AÇÃO -->
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button type="button" class="btn btn-danger">
+                <span class="glyphicon glyphicon-trash"></span> Excluir
+            </button>
+            <button type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-remove"></span> Cancelar
+            </button>
+            <button type="button" class="btn btn-primary">
+                <span class="glyphicon glyphicon-ok"></span> Salvar
+            </button>
+        </div>
+    </div>
+
+</div>

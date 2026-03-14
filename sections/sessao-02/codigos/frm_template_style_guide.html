@@ -1,0 +1,83 @@
+<!--
+    frm_template_style_guide.html
+    Sessão 02 — Template para exercício com Style Guide
+    Treinamento Avançado | JYNX
+
+    INSTRUÇÕES PARA O ALUNO:
+    Use este template como base para criar seu formulário.
+    Requisito: usar pelo menos 5 componentes diferentes do Style Guide.
+
+    Componentes já incluídos neste template:
+    1. Panel (agrupamento)
+    2. Grid (col-md-*)
+    3. Form-group + Input text
+    4. Select
+    5. Botões (btn-primary, btn-default)
+
+    Sugestões de componentes extras para adicionar:
+    - Textarea
+    - Checkbox / Radio
+    - Table (table-striped)
+    - Alert (alert-success, alert-warning)
+    - Modal
+    - Badge / Label
+    - Tabs (nav-tabs)
+-->
+
+<div class="fluig-style-guide" style="padding: 20px;">
+
+    <!-- ============================================ -->
+    <!-- PAINEL 1: Dados Principais                   -->
+    <!-- Componente: Panel                            -->
+    <!-- ============================================ -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Dados Principais</h3>
+        </div>
+        <div class="panel-body">
+
+            <!-- Componente: Grid (2 colunas) -->
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <!-- Componente: Form-group + Input -->
+                    <div class="form-group">
+                        <label for="campo1">Campo 1</label>
+                        <input type="text" class="form-control" id="campo1" name="campo1" placeholder="Preencha aqui">
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <!-- Componente: Select -->
+                    <div class="form-group">
+                        <label for="campo2">Campo 2</label>
+                        <select class="form-control" id="campo2" name="campo2">
+                            <option value="">Selecione...</option>
+                            <option value="opcao1">Opção 1</option>
+                            <option value="opcao2">Opção 2</option>
+                            <option value="opcao3">Opção 3</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- ÁREA PARA O ALUNO ADICIONAR COMPONENTES      -->
+    <!-- Adicione pelo menos mais 2 componentes aqui  -->
+    <!-- ============================================ -->
+
+
+
+    <!-- ============================================ -->
+    <!-- BOTÕES DE AÇÃO                               -->
+    <!-- Componente: Buttons                          -->
+    <!-- ============================================ -->
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button type="button" class="btn btn-default">Cancelar</button>
+            <button type="button" class="btn btn-primary">Salvar</button>
+        </div>
+    </div>
+
+</div>

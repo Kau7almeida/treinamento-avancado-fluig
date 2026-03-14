@@ -1,0 +1,92 @@
+<!--
+    frm_hello_fluig.html
+    Sessão 02 — Primeiro deploy no Fluig
+    Treinamento Avançado | JYNX
+
+    PONTOS PARA EXPLICAR NO LIVE CODING:
+    1. O Fluig exige que campos tenham o atributo "name" para persistir dados
+    2. As classes CSS vêm do Style Guide (form-control, btn, etc)
+    3. O form não tem action — o Fluig cuida do submit
+    4. Cada div.form-group agrupa label + input (padrão Bootstrap/Style Guide)
+-->
+
+<div class="fluig-style-guide" style="padding: 20px;">
+
+    <!-- PAINEL: Agrupamento visual de campos -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Hello Fluig!</h3>
+        </div>
+        <div class="panel-body">
+
+            <!-- GRID: 2 colunas no desktop, 1 no mobile -->
+            <div class="row">
+
+                <!-- Coluna 1: Nome -->
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <label for="nome">Nome Completo</label>
+                        <!-- name="nome" → é o que persiste no banco do Fluig -->
+                        <input type="text" class="form-control" id="nome" name="nome"
+                            placeholder="Digite seu nome completo">
+                    </div>
+                </div>
+
+                <!-- Coluna 2: Email -->
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" class="form-control" id="email" name="email"
+                            placeholder="seu.email@empresa.com">
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Linha 2: Departamento (Select) -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="departamento">Departamento</label>
+                        <select class="form-control" id="departamento" name="departamento">
+                            <option value="">Selecione...</option>
+                            <option value="TI">TI</option>
+                            <option value="RH">Recursos Humanos</option>
+                            <option value="FIN">Financeiro</option>
+                            <option value="COM">Compras</option>
+                            <option value="ADM">Administrativo</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Data de admissão -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="data_admissao">Data de Admissão</label>
+                        <input type="date" class="form-control" id="data_admissao" name="data_admissao">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Linha 3: Observação (Textarea) -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="observacao">Observação</label>
+                        <textarea class="form-control" id="observacao" name="observacao" rows="3"
+                            placeholder="Alguma observação adicional?"></textarea>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /panel-body -->
+    </div><!-- /panel -->
+
+    <!-- ALERTA informativo -->
+    <div class="alert alert-info">
+        <strong>Dica:</strong> Este é seu primeiro formulário Fluig!
+        Todos os campos acima possuem o atributo <code>name</code>,
+        o que garante que os dados serão salvos na plataforma.
+    </div>
+
+</div>
