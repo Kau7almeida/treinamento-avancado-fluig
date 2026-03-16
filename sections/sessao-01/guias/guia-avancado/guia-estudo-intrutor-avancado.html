@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Avançado do Instrutor — Sessão 01 | JYNX Fluig</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --o: #E85D04;
+            --ol: #FF8C42;
+            --og: rgba(232, 93, 4, .12);
+            --dk: #0D0D12;
+            --dk2: #14141E;
+            --dk3: #1C1C2A;
+            --dkc: #1A1A28;
+            --lt: #F8F7F4;
+            --tx: #E8E6E0;
+            --tm: #9D9B95;
+            --td: #6B6964;
+            --g: #34D399;
+            --r: #F87171;
+            --b: #60A5FA;
+            --p: #A78BFA;
+            --y: #FBBF24;
+            --mono: 'JetBrains Mono', monospace;
+            --sans: 'DM Sans', sans-serif;
+            --disp: 'Playfair Display', serif;
+            --rad: 10px;
+            --radl: 16px
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--dk);
+            color: var(--tx);
+            font-family: var(--sans);
+            font-size: 16px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased
+        }
+
+        .bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(13, 13, 18, .85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(232, 93, 4, .15);
+            padding: 0 2rem;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .bar .logo {
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 2px;
+            color: var(--o)
+        }
+
+        .bar nav {
+            display: flex;
+            gap: 6px
+        }
+
+        .bar nav a {
+            color: var(--tm);
+            text-decoration: none;
+            font-size: 12px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: all .2s
+        }
+
+        .bar nav a:hover {
+            color: var(--tx);
+            background: rgba(255, 255, 255, .06)
+        }
+
+        .hero {
+            padding: 120px 2rem 60px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center
+        }
+
+        .hero .tag {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--r);
+            border: 1px solid rgba(248, 113, 113, .3);
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            background: rgba(248, 113, 113, .08)
+        }
+
+        .hero h1 {
+            font-family: var(--disp);
+            font-size: clamp(28px, 5vw, 46px);
+            color: var(--lt);
+            line-height: 1.15;
+            margin-bottom: 16px
+        }
+
+        .hero h1 span {
+            color: var(--o)
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: var(--tm);
+            max-width: 620px;
+            margin: 0 auto
+        }
+
+        .ct {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 2rem
+        }
+
+        section {
+            padding: 55px 0
+        }
+
+        .sl {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--o);
+            margin-bottom: 8px
+        }
+
+        .st {
+            font-family: var(--disp);
+            font-size: clamp(22px, 3.5vw, 32px);
+            color: var(--lt);
+            margin-bottom: 20px;
+            line-height: 1.2
+        }
+
+        .st2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--lt);
+            margin: 32px 0 14px
+        }
+
+        .st3 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--ol);
+            margin: 24px 0 10px
+        }
+
+        .sd {
+            color: var(--tm);
+            margin-bottom: 20px;
+            font-size: 15px
+        }
+
+        code {
+            font-family: var(--mono);
+            font-size: 12px;
+            background: rgba(232, 93, 4, .15);
+            color: var(--ol);
+            padding: 2px 6px;
+            border-radius: 4px
+        }
+
+        .card {
+            background: var(--dkc);
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: var(--radl);
+            padding: 24px;
+            margin-bottom: 14px;
+            transition: border-color .3s
+        }
+
+        .card:hover {
+            border-color: rgba(232, 93, 4, .2)
+        }
+
+        .card h3 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--lt);
+            margin-bottom: 10px
+        }
+
+        .card p {
+            color: var(--tm);
+            font-size: 14px;
+            margin-bottom: 10px;
+            line-height: 1.7
+        }
+
+        .card p:last-child {
+            margin-bottom: 0
+        }
+
+        .card strong {
+            color: var(--tx)
+        }
+
+        .card ul {
+            margin: 8px 0;
+            padding-left: 20px
+        }
+
+        .card li {
+            color: var(--tm);
+            font-size: 14px;
+            margin-bottom: 4px
+        }
+
+        .cb {
+            background: var(--dk2);
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: var(--rad);
+            padding: 18px;
+            margin: 14px 0;
+            overflow-x: auto;
+            position: relative
+        }
+
+        .cb pre {
+            font-family: var(--mono);
+            font-size: 12.5px;
+            line-height: 1.8;
+            color: var(--tm);
+            white-space: pre;
+            margin: 0
+        }
+
+        .cb .tg {
+            color: var(--o)
+        }
+
+        .cb .cm {
+            color: var(--td)
+        }
+
+        .cb .ok {
+            color: var(--g)
+        }
+
+        .cb .no {
+            color: var(--r)
+        }
+
+        .cb .vl {
+            color: var(--b)
+        }
+
+        .cb .st {
+            color: var(--y);
+            font-family: var(--mono);
+            font-size: 12.5px;
+            margin: 0;
+            line-height: 1.8
+        }
+
+        .cl {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 4px
+        }
+
+        .cl.sv {
+            background: rgba(232, 93, 4, .2);
+            color: var(--ol)
+        }
+
+        .cl.br {
+            background: rgba(96, 165, 250, .2);
+            color: var(--b)
+        }
+
+        .tip {
+            background: rgba(232, 93, 4, .08);
+            border-left: 3px solid var(--o);
+            border-radius: 0 var(--rad) var(--rad) 0;
+            padding: 14px 18px;
+            margin: 18px 0;
+            font-size: 14px;
+            color: var(--tm);
+            line-height: 1.7
+        }
+
+        .tip strong {
+            color: var(--o)
+        }
+
+        .warn {
+            background: rgba(248, 113, 113, .08);
+            border-left: 3px solid var(--r);
+            border-radius: 0 var(--rad) var(--rad) 0;
+            padding: 14px 18px;
+            margin: 18px 0;
+            font-size: 14px;
+            color: var(--tm);
+            line-height: 1.7
+        }
+
+        .warn strong {
+            color: var(--r)
+        }
+
+        .info {
+            background: rgba(96, 165, 250, .08);
+            border-left: 3px solid var(--b);
+            border-radius: 0 var(--rad) var(--rad) 0;
+            padding: 14px 18px;
+            margin: 18px 0;
+            font-size: 14px;
+            color: var(--tm);
+            line-height: 1.7
+        }
+
+        .info strong {
+            color: var(--b)
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0;
+            font-size: 13px
+        }
+
+        th {
+            text-align: left;
+            padding: 10px 14px;
+            background: var(--dk3);
+            color: var(--o);
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 2px solid rgba(232, 93, 4, .2)
+        }
+
+        td {
+            padding: 10px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, .04);
+            color: var(--tm);
+            vertical-align: top
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, .02)
+        }
+
+        .dbg {
+            background: var(--dkc);
+            border: 1px solid rgba(96, 165, 250, .15);
+            border-radius: var(--radl);
+            padding: 24px;
+            margin-bottom: 14px
+        }
+
+        .dbg h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--b);
+            margin-bottom: 10px
+        }
+
+        .dbg p {
+            color: var(--tm);
+            font-size: 14px;
+            margin-bottom: 8px;
+            line-height: 1.7
+        }
+
+        .dbg strong {
+            color: var(--tx)
+        }
+
+        .dbg .steps {
+            background: var(--dk2);
+            border-radius: var(--rad);
+            padding: 16px;
+            margin-top: 12px;
+            font-family: var(--mono);
+            font-size: 12.5px;
+            line-height: 1.9;
+            color: var(--tm)
+        }
+
+        .dbg .steps .label {
+            color: var(--b);
+            font-weight: 500
+        }
+
+        .dbg .steps .action {
+            color: var(--g)
+        }
+
+        .dbg .steps .check {
+            color: var(--y)
+        }
+
+        .evt {
+            display: grid;
+            grid-template-columns: 32px 1fr;
+            gap: 0;
+            margin: 14px 0
+        }
+
+        .evt .num {
+            background: var(--o);
+            color: #fff;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: 2px
+        }
+
+        .evt .desc {
+            padding: 4px 0 16px 12px;
+            border-left: 2px solid rgba(232, 93, 4, .2);
+            margin-left: 13px
+        }
+
+        .evt .desc:last-child {
+            border-left: 2px solid transparent
+        }
+
+        .evt .fn {
+            font-family: var(--mono);
+            font-size: 13px;
+            color: var(--ol);
+            font-weight: 500
+        }
+
+        .evt .ex {
+            font-size: 13px;
+            color: var(--td);
+            margin-top: 2px
+        }
+
+        .acc {
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: var(--radl);
+            margin-bottom: 10px;
+            overflow: hidden
+        }
+
+        .acc:hover {
+            border-color: rgba(232, 93, 4, .2)
+        }
+
+        .acc-h {
+            padding: 18px 22px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none
+        }
+
+        .acc-h h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--lt)
+        }
+
+        .acc-h .ch {
+            color: var(--td);
+            transition: transform .3s;
+            font-size: 16px
+        }
+
+        .acc-h .ch.op {
+            transform: rotate(180deg)
+        }
+
+        .acc-b {
+            padding: 0 22px 22px;
+            display: none
+        }
+
+        .acc-b.op {
+            display: block
+        }
+
+        .ft {
+            text-align: center;
+            padding: 40px 2rem;
+            border-top: 1px solid rgba(255, 255, 255, .04);
+            margin-top: 40px
+        }
+
+        .ft p {
+            font-size: 13px;
+            color: var(--td)
+        }
+
+        .ft .jx {
+            color: var(--o);
+            font-weight: 700
+        }
+
+        .sb {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 40px;
+            height: 40px;
+            background: var(--o);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity .3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50
+        }
+
+        .sb.sh {
+            opacity: 1
+        }
+
+        .dv {
+            height: 1px;
+            background: rgba(255, 255, 255, .04);
+            margin: 0
+        }
+
+        .copy {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(232, 93, 4, .2);
+            border: none;
+            color: var(--ol);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background .2s;
+            z-index: 2
+        }
+
+        .copy:hover {
+            background: rgba(232, 93, 4, .4)
+        }
+
+        .copy.ok {
+            background: rgba(52, 211, 153, .2);
+            color: var(--g)
+        }
+
+        @media(max-width:640px) {
+            .bar nav {
+                display: none
+            }
+
+            .hero {
+                padding: 90px 1.5rem 40px
+            }
+
+            .ct {
+                padding: 0 1.5rem
+            }
+
+            section {
+                padding: 36px 0
+            }
+
+            table {
+                font-size: 11px
+            }
+
+            th,
+            td {
+                padding: 8px 10px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bar"><span class="logo">* J Y N X</span>
+        <nav><a href="#arq">Arquitetura</a><a href="#rhino">Rhino JS</a><a href="#pilares">Pilares</a><a
+                href="#debug">Debugging</a><a href="#dicas">Dicas</a></nav>
+    </div>
+
+    <div class="hero">
+        <div class="tag">Material avançado — exclusivo do instrutor</div>
+        <h1>Guia de Estudo <span>Avançado</span> — Sessão 01</h1>
+        <p>Arquitetura profunda, código real de cada pilar, Rhino com workarounds, e cenários de debugging passo a
+            passo. Complementa o guia básico.</p>
+    </div>
+
+    <div class="ct">
+        <div class="dv"></div>
+
+        <!-- ==================== ARQUITETURA ==================== -->
+        <section id="arq">
+            <div class="sl">Profundidade técnica</div>
+            <div class="st">Arquitetura técnica em profundidade</div>
+
+            <div class="st2">1.1 O servidor de aplicação: JBoss → WildFly</div>
+            <div class="card">
+                <h3>O que o WildFly faz pelo Fluig</h3>
+                <ul>
+                    <li><strong>Pool de conexões JDBC:</strong> Mantém conexões abertas com o banco. Datasets não abrem
+                        conexão nova — pegam do pool. Crítico para performance.</li>
+                    <li><strong>Gerenciamento de transações:</strong> Salvar formulário + mover processo + enviar
+                        notificação acontecem atomicamente — tudo passa ou tudo falha.</li>
+                    <li><strong>EJBs:</strong> Serviços do Fluig são EJBs. Quando o Rhino chama
+                        <code>hAPI.moveTo()</code>, invoca um EJB por baixo.</li>
+                    <li><strong>Classloader isolado:</strong> Bug em um dataset não derruba o servidor — o classloader
+                        isola o problema.</li>
+                </ul>
+            </div>
+
+            <div class="st3">standalone.xml — o arquivo que controla tudo</div>
+            <p class="sd">Fica em <code>WILDFLY_HOME/standalone/configuration/</code>. Controla datasources, logging,
+                pool de threads, segurança. O instrutor não edita, mas saber que existe impressiona a turma técnica.</p>
+            <div class="cb"><span class="cl sv">standalone.xml</span>
+                <pre>
+<span class="cm">&lt;!-- Configuração de datasource (conexão com banco) --&gt;</span>
+<span class="tg">&lt;subsystem</span> xmlns="urn:jboss:domain:datasources:4.0"<span class="tg">&gt;</span>
+    &lt;datasource jndi-name="<span class="vl">java:/jdbc/FluigDS</span>" pool-name="FluigDS"&gt;
+        &lt;connection-url&gt;<span class="vl">jdbc:postgresql://localhost:5432/fluig</span>&lt;/connection-url&gt;
+        &lt;driver&gt;postgresql&lt;/driver&gt;
+        &lt;pool&gt;
+            &lt;min-pool-size&gt;<span class="ok">10</span>&lt;/min-pool-size&gt;
+            &lt;max-pool-size&gt;<span class="ok">100</span>&lt;/max-pool-size&gt;
+        &lt;/pool&gt;
+    &lt;/datasource&gt;
+<span class="tg">&lt;/subsystem&gt;</span></pre>
+            </div>
+            <div class="tip"><strong>Se perguntarem "por que o Fluig tá lento?":</strong> Pode ser o
+                <code>max-pool-size</code> muito baixo para o número de usuários. Conexões ficam na fila esperando.
+            </div>
+
+            <div class="st2">1.2 Ciclo de vida de um deploy</div>
+            <div class="cb">
+                <pre>
+<span class="tg">1.</span> Eclipse/Studio empacota artefatos em .war
+<span class="tg">2.</span> Pacote enviado via HTTP para a API de deploy
+<span class="tg">3.</span> Fluig descompacta no diretório de artefatos
+<span class="tg">4.</span> Classloader carrega novos scripts/classes
+<span class="tg">5.</span> Formulários HTML registrados no ECM
+<span class="tg">6.</span> Processos BPMN registrados no BPM engine
+<span class="tg">7.</span> Datasets JS registrados no registry
+<span class="tg">8.</span> Solr reindexa novos conteúdos
+<span class="tg">9.</span> Fluig invalida caches <span class="cm">← às vezes falha silenciosamente!</span></pre>
+            </div>
+            <div class="warn"><strong>Problema comum:</strong> O passo 9 (invalidação de cache) falha silenciosamente.
+                Por isso <code>Ctrl+F5</code> no browser resolve muitos problemas pós-deploy.</div>
+
+            <div class="st2">1.3 Como o Fluig persiste dados de formulários</div>
+            <p class="sd">Quando um formulário é cadastrado, o Fluig lê o HTML, identifica os campos <code>name</code>,
+                e cria uma tabela no banco com uma coluna para cada campo.</p>
+
+            <div class="st3">Tabela pai vs tabela filha (os 3 underscores)</div>
+            <div class="cb"><span class="cl sv">HTML do formulário</span>
+                <pre>
+<span class="cm">&lt;!-- Campos da TABELA PAI (1 registro por formulário) --&gt;</span>
+<span class="tg">&lt;input name="solicitante"</span> type="text"&gt;
+<span class="tg">&lt;input name="data_solicitacao"</span> type="date"&gt;
+
+<span class="cm">&lt;!-- Campos da TABELA FILHA (N registros — lista dinâmica) --&gt;</span>
+&lt;table&gt;
+  &lt;tr&gt;
+    <span class="vl">&lt;input name="item_desc___1"</span> type="text"&gt;   <span class="cm">&lt;!-- ___ = tabela filha --&gt;</span>
+    <span class="vl">&lt;input name="item_qtd___1"</span> type="number"&gt;
+    <span class="vl">&lt;input name="item_valor___1"</span> type="text"&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</pre>
+            </div>
+
+            <div class="cb"><span class="cl sv">No banco de dados</span>
+                <pre>
+<span class="tg">Tabela principal</span> (1 registro por formulário):
+| documentid | solicitante  | data_solicitacao |
+|------------|--------------|------------------|
+| 12345      | João Silva   | 2026-03-17       |
+
+<span class="vl">Tabela filha</span> (N registros por formulário):
+| documentid | item_desc      | item_qtd | item_valor |
+|------------|----------------|----------|------------|
+| 12345      | Notebook Dell  | 2        | 4500.00    |
+| 12345      | Mouse Wireless | 5        | 89.90      |</pre>
+            </div>
+            <div class="tip"><strong>Os 3 underscores <code>___</code></strong> são a convenção que o Fluig usa para
+                identificar campos de tabela filha. O sufixo <code>___1</code>, <code>___2</code> indica a linha.
+                Crucial para listas dinâmicas nas sessões 03-04.</div>
+        </section>
+
+        <div class="dv"></div>
+
+        <!-- ==================== RHINO JS ==================== -->
+        <section id="rhino">
+            <div class="sl">Código real</div>
+            <div class="st">Rhino JS — limitações, workarounds e exemplos</div>
+
+            <div class="st2">Limitação 1: var vaza do escopo de bloco</div>
+            <div class="cb"><button class="copy" onclick="cp(this)">Copiar</button>
+                <pre>
+<span class="cm">// PROBLEMA: var vaza do for (ES5 não tem escopo de bloco)</span>
+<span class="no">for (var i = 0; i < items.length; i++) {</span>
+    <span class="no">var item = items[i];</span>  <span class="cm">// reatribuída a cada iteração</span>
+<span class="no">}</span>
+log.info("i ainda existe: " + i);  <span class="cm">// funciona! não é undefined</span>
+
+<span class="cm">// WORKAROUND: IIFE para criar escopo isolado</span>
+<span class="ok">for (var i = 0; i < items.length; i++) {</span>
+    <span class="ok">(function(index) {</span>
+        var item = items[index];  <span class="cm">// cópia local, segura</span>
+        <span class="cm">// lógica aqui dentro...</span>
+    <span class="ok">})(i);</span>
+<span class="ok">}</span></pre>
+            </div>
+
+            <div class="st2">Limitação 2: sem template literals</div>
+            <div class="cb"><button class="copy" onclick="cp(this)">Copiar</button>
+                <pre>
+<span class="cm">// PROIBIDO:</span>
+<span class="no">var msg = `Olá ${nome}, pedido #${numero} aprovado`;</span>
+
+<span class="cm">// CORRETO (concatenação simples):</span>
+<span class="ok">var msg = "Olá " + nome + ", pedido #" + numero + " aprovado";</span>
+
+<span class="cm">// WORKAROUND para strings longas (mais legível):</span>
+<span class="ok">var msg = [</span>
+    "Olá ", nome, ",",
+    " seu pedido #", numero,
+    " foi aprovado em ", data,
+    " pelo aprovador ", aprovador
+<span class="ok">].join("");</span></pre>
+            </div>
+
+            <div class="st2">Limitação 3: sem map/filter nativos</div>
+            <div class="cb"><button class="copy" onclick="cp(this)">Copiar</button>
+                <pre>
+<span class="cm">// WORKAROUND: funções utilitárias reutilizáveis</span>
+<span class="ok">function mapArray(arr, fn) {</span>
+    var result = [];
+    for (var i = 0; i &lt; arr.length; i++) {
+        result.push(fn(arr[i], i));
+    }
+    return result;
+<span class="ok">}</span>
+
+<span class="ok">function filterArray(arr, fn) {</span>
+    var result = [];
+    for (var i = 0; i &lt; arr.length; i++) {
+        if (fn(arr[i], i)) { result.push(arr[i]); }
+    }
+    return result;
+<span class="ok">}</span>
+
+<span class="cm">// Uso (quase tão limpo quanto ES6):</span>
+var nomes = mapArray(usuarios, <span class="ok">function(u) { return u.nome; }</span>);
+var ativos = filterArray(usuarios, <span class="ok">function(u) { return u.ativo; }</span>);</pre>
+            </div>
+
+            <div class="st2">Chamada REST com java.net.URL</div>
+            <div class="cb"><button class="copy" onclick="cp(this)">Copiar</button>
+                <pre>
+<span class="cm">// Dataset ou evento — roda no SERVIDOR (Rhino ES5)</span>
+<span class="ok">function chamarApiRest(urlStr, metodo, authHeader) {</span>
+    var url = new <span class="vl">java.net.URL</span>(urlStr);
+    var conn = url.openConnection();
+
+    conn.setRequestMethod(metodo || "GET");
+    conn.setRequestProperty("Content-Type", "application/json");
+    conn.setRequestProperty("Accept", "application/json");
+
+    <span class="cm">// Basic Auth</span>
+    if (authHeader) {
+        conn.setRequestProperty("Authorization", authHeader);
+    }
+
+    <span class="cm">// Timeouts (milissegundos)</span>
+    conn.setConnectTimeout(<span class="tg">10000</span>);  <span class="cm">// 10s para conectar</span>
+    conn.setReadTimeout(<span class="tg">30000</span>);     <span class="cm">// 30s para ler resposta</span>
+
+    var responseCode = conn.getResponseCode();
+
+    if (responseCode >= 200 && responseCode &lt; 300) {
+        var reader = new <span class="vl">java.io.BufferedReader</span>(
+            new java.io.InputStreamReader(
+                conn.getInputStream(), "UTF-8"
+            )
+        );
+        var response = "";
+        var line;
+        while ((line = reader.readLine()) !== null) {
+            response += line;
+        }
+        reader.close();
+        return { status: responseCode, body: response, success: true };
+    } else {
+        return { status: responseCode, success: false };
+    }
+<span class="ok">}</span>
+
+<span class="cm">// Uso com Basic Auth do Protheus:</span>
+var auth = "Basic " + <span class="vl">java.util.Base64</span>.getEncoder().encodeToString(
+    new java.lang.String("usuario:senha").getBytes("UTF-8")
+);
+var resultado = chamarApiRest("https://protheus.empresa.com/rest/SA2", "GET", auth);</pre>
+            </div>
+
+            <div class="st2">Logging no servidor (sem console.log!)</div>
+            <div class="cb"><button class="copy" onclick="cp(this)">Copiar</button>
+                <pre>
+<span class="cm">// console.log NÃO EXISTE no Rhino!</span>
+<span class="no">console.log("teste");</span>  <span class="cm">// ERRO!</span>
+
+<span class="cm">// Use o logger do Fluig:</span>
+var log = <span class="vl">com.datasul.technology.webdesk.logging.LogManager</span>
+            .getLogger("meu-dataset");
+
+<span class="ok">log.info</span>("Iniciando processamento");
+<span class="tg">log.warn</span>("Valor inesperado: " + valor);
+<span class="no">log.error</span>("Erro na integração: " + e.message);
+
+<span class="cm">// Log aparece em: WILDFLY_HOME/standalone/log/server.log</span></pre>
+            </div>
+
+            <div class="st2">Ciclo de vida dos eventos de formulário</div>
+            <p class="sd">A ordem EXATA em que os eventos disparam. Memorize isso.</p>
+
+            <div class="card" style="padding:28px">
+                <h3 style="margin-bottom:16px">Usuário ABRE a tarefa</h3>
+                <div class="evt">
+                    <div class="num">1</div>
+                    <div class="desc">
+                        <div class="fn">displayFields(form, customHTML)</div>
+                        <div class="ex">Controla visibilidade dos campos</div>
+                    </div>
+                    <div class="num">2</div>
+                    <div class="desc">
+                        <div class="fn">enableFields(form, customHTML)</div>
+                        <div class="ex">Controla se campos são editáveis</div>
+                    </div>
+                    <div class="num">3</div>
+                    <div class="desc">
+                        <div class="fn">inputFields(form, customHTML)</div>
+                        <div class="ex">Define valores iniciais</div>
+                    </div>
+                </div>
+
+                <h3 style="margin:20px 0 16px">Usuário CLICA em "Enviar"</h3>
+                <div class="evt">
+                    <div class="num">4</div>
+                    <div class="desc">
+                        <div class="fn">validateForm(form)</div>
+                        <div class="ex">Valida dados — usa <code>throw</code> para bloquear, NÃO
+                            <code>return false</code></div>
+                    </div>
+                    <div class="num">5</div>
+                    <div class="desc">
+                        <div class="fn">beforeTaskSave(colleagueId, visaId, movementSequence)</div>
+                        <div class="ex">Lógica antes de salvar — mantenha leve!</div>
+                    </div>
+                    <div class="num">6</div>
+                    <div class="desc" style="color:var(--g)">
+                        <div class="fn" style="color:var(--g)">[ FLUIG SALVA NO BANCO ]</div>
+                    </div>
+                    <div class="num">7</div>
+                    <div class="desc">
+                        <div class="fn">afterTaskSave(colleagueId, visaId, movementSequence)</div>
+                        <div class="ex">Lógica depois de salvar</div>
+                    </div>
+                    <div class="num">8</div>
+                    <div class="desc">
+                        <div class="fn">beforeTaskComplete(colleagueId, visaId, movementSequence)</div>
+                        <div class="ex">Lógica antes de completar tarefa</div>
+                    </div>
+                    <div class="num">9</div>
+                    <div class="desc" style="color:var(--g)">
+                        <div class="fn" style="color:var(--g)">[ FLUIG MOVE O PROCESSO ]</div>
+                    </div>
+                    <div class="num">10</div>
+                    <div class="desc" style="border:none">
+                        <div class="fn">afterTaskComplete(colleagueId, visaId, movementSequence)</div>
+                        <div class="ex">Melhor lugar para lógica pesada (integrações, emails)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="dv"></div>
+
+        <!-- ==================== PILARES COM CÓDIGO ==================== -->
+        <section id="pilares">
+            <div class="sl">Código real</div>
+            <div class="st">Os 5 pilares com exemplos práticos</div>
+
+            <div class="st2">ECM — Formulário completo</div>
+            <div class="cb"><button class="copy" onclick="cp(this)">Copiar</button><span class="cl br">HTML + Browser
+                    JS</span>
+                <pre>
+<span class="cm">&lt;!-- frm_compras_solicitacao.html --&gt;</span>
+<span class="tg">&lt;div class="fluig-style-guide"</span> style="padding: 20px;"&gt;
+  &lt;div class="panel panel-default"&gt;
+    &lt;div class="panel-heading"&gt;
+      &lt;h3 class="panel-title"&gt;Solicitação de Compras&lt;/h3&gt;
+    &lt;/div&gt;
+    &lt;div class="panel-body"&gt;
+      &lt;div class="row"&gt;
+        &lt;div class="col-md-6"&gt;
+          &lt;div class="form-group"&gt;
+            &lt;label&gt;Solicitante&lt;/label&gt;
+            &lt;input type="text" class="form-control"
+                   <span class="ok">id="solicitante" name="solicitante"</span> readonly&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col-md-3"&gt;
+          &lt;div class="form-group"&gt;
+            &lt;label&gt;Data&lt;/label&gt;
+            &lt;input type="date" class="form-control"
+                   <span class="ok">id="data_solicitacao" name="data_solicitacao"</span>&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+<span class="vl">&lt;script&gt;</span>
+<span class="cm">// RODA NO BROWSER — ES6 ok!</span>
+$(document).ready(function() {
+    $('#solicitante').val(WCMAPI.getUser());
+    $('#data_solicitacao').val(new Date().toISOString().split('T')[0]);
+});
+<span class="vl">&lt;/script&gt;</span></pre>
+            </div>
+
+            <div class="st2">BPM — Evento de processo com alçada</div>
+            <div class="cb"><button class="copy" onclick="cp(this)">Copiar</button><span class="cl sv">Servidor (Rhino
+                    ES5)</span>
+                <pre>
+<span class="cm">// Evento: afterTaskComplete</span>
+<span class="ok">function afterTaskComplete</span>(colleagueId, visaId, movementSequence) {
+    var valorTotal = parseFloat(<span class="vl">hAPI.getCardValue</span>("valor_total"));
+
+    if (valorTotal > 10000) {
+        <span class="cm">// Mover para "Aprovação Diretoria" (atividade 3)</span>
+        <span class="vl">hAPI.setAutomaticDecision</span>(3, [], "Valor acima de R$10.000");
+    } else {
+        <span class="cm">// Mover para "Aprovação Gerente" (atividade 2)</span>
+        <span class="vl">hAPI.setAutomaticDecision</span>(2, [], "Valor dentro da alçada");
+    }
+}</pre>
+            </div>
+
+            <div class="st2">Dataset customizado</div>
+            <div class="cb"><button class="copy" onclick="cp(this)">Copiar</button><span class="cl sv">Servidor (Rhino
+                    ES5)</span>
+                <pre>
+<span class="cm">// datasets/ds_departamentos.js</span>
+<span class="ok">function createDataset</span>(fields, constraints, sortFields) {
+    var dataset = DatasetBuilder.newDataset();
+    dataset.addColumn("codigo");
+    dataset.addColumn("nome");
+    dataset.addColumn("gerente");
+
+    dataset.addRow(["TI",  "Tecnologia da Informação", "João Silva"]);
+    dataset.addRow(["RH",  "Recursos Humanos",         "Maria Santos"]);
+    dataset.addRow(["FIN", "Financeiro",                "Carlos Lima"]);
+    dataset.addRow(["COM", "Compras",                   "Ana Costa"]);
+
+    <span class="tg">return dataset;</span>  <span class="cm">// OBRIGATÓRIO! Sem isso = retorna null</span>
+}</pre>
+            </div>
+
+            <div class="st3">Consumindo dataset no browser</div>
+            <div class="cb"><button class="copy" onclick="cp(this)">Copiar</button><span class="cl br">Browser (ES6
+                    ok)</span>
+                <pre>
+$(document).ready(function() {
+    var c1 = DatasetFactory.createConstraint(
+        "codigo", "", "", ConstraintType.MUST
+    );
+    var dados = DatasetFactory.getDataset(
+        "ds_departamentos", null, [c1], null
+    );
+    for (var i = 0; i &lt; dados.values.length; i++) {
+        var codigo = dados.getValue(i, "codigo");
+        var nome = dados.getValue(i, "nome");
+        $('#centro_custo').append(
+            '&lt;option value="' + codigo + '"&gt;' + nome + '&lt;/option&gt;'
+        );
+    }
+});</pre>
+            </div>
+
+            <div class="st3">Consumindo dataset dentro de evento (servidor)</div>
+            <div class="cb"><button class="copy" onclick="cp(this)">Copiar</button><span class="cl sv">Servidor (Rhino
+                    ES5)</span>
+                <pre>
+<span class="ok">function beforeTaskSave</span>(colleagueId, visaId, movementSequence) {
+    var constraints = [];
+    constraints.push(
+        <span class="vl">DatasetFactory.createConstraint</span>(
+            "codigo", "TI", "TI", ConstraintType.MUST
+        )
+    );
+    var dataset = <span class="vl">DatasetFactory.getDataset</span>(
+        "ds_departamentos", null, constraints, null
+    );
+    if (dataset.rowsCount > 0) {
+        var gerente = dataset.getValue(0, "gerente");
+        <span class="vl">hAPI.setCardValue</span>("aprovador", gerente);
+    }
+}</pre>
+            </div>
+
+            <div class="st2">WCM — Widget com binding</div>
+            <div class="cb"><button class="copy" onclick="cp(this)">Copiar</button><span class="cl br">Browser (Widget
+                    JS)</span>
+                <pre>
+var WdgComprasDashboard = SuperWidget.extend({
+    <span class="ok">init:</span> function() {
+        this.carregarDados();
+    },
+    <span class="ok">bindings:</span> {
+        local: {
+            'click .btn-atualizar': ['carregarDados']
+        }
+    },
+    <span class="ok">carregarDados:</span> function() {
+        var self = this;
+        DatasetFactory.getDataset(
+            "ds_solicitacoes_pendentes", null, [], null,
+            {
+                success: function(data) {
+                    self.renderizarTabela(data);
+                },
+                error: function(jqXHR, textStatus) {
+                    self.showError("Erro: " + textStatus);
+                }
+            }
+        );
+    },
+    renderizarTabela: function(data) {
+        var html = '&lt;table class="table table-striped"&gt;';
+        html += '&lt;thead&gt;&lt;tr&gt;&lt;th&gt;ID&lt;/th&gt;&lt;th&gt;Solicitante&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;';
+        html += '&lt;tbody&gt;';
+        for (var i = 0; i &lt; data.values.length; i++) {
+            html += '&lt;tr&gt;&lt;td&gt;' + data.getValue(i, "documentid")
+                 + '&lt;/td&gt;&lt;td&gt;' + data.getValue(i, "solicitante")
+                 + '&lt;/td&gt;&lt;/tr&gt;';
+        }
+        html += '&lt;/tbody&gt;&lt;/table&gt;';
+        this.$el.find('.dashboard-content').html(html);
+    }
+});</pre>
+            </div>
+        </section>
+
+        <div class="dv"></div>
+
+        <!-- ==================== DEBUGGING ==================== -->
+        <section id="debug">
+            <div class="sl">Resolução de problemas</div>
+            <div class="st">Cenários de debugging passo a passo</div>
+
+            <div class="dbg">
+                <h3>&#128269; "O formulário salvou mas o campo está vazio"</h3>
+                <div class="steps">
+                    <pre><span class="label">Passo 1:</span> Inspecionar HTML (F12)
+  <span class="check">→ O campo tem atributo "name"?</span>
+  <span class="action">→ Se NÃO → adicionar name. Resolvido.</span>
+
+<span class="label">Passo 2:</span> O name tem caracteres especiais?
+  <span class="check">→ Espaços, acentos, hífens?</span>
+  <span class="action">→ Se SIM → trocar para snake_case sem acentos</span>
+
+<span class="label">Passo 3:</span> O campo está dentro do &lt;form&gt;?
+  <span class="check">→ Verificar se não há &lt;/form&gt; fechando antes do campo</span>
+
+<span class="label">Passo 4:</span> Existe outro campo com o mesmo name?
+  <span class="check">→ Ctrl+F pelo valor do name no HTML</span>
+  <span class="action">→ Se duplicado → segundo sobrescreve o primeiro</span>
+
+<span class="label">Passo 5:</span> Algum evento JS está limpando?
+  <span class="check">→ displayFields escondendo pode limpar valor</span>
+  <span class="action">→ Usar enableFields para desabilitar em vez de esconder</span></pre>
+                </div>
+            </div>
+
+            <div class="dbg">
+                <h3>&#128269; "O dataset retorna null ou vazio"</h3>
+                <div class="steps">
+                    <pre><span class="label">Passo 1:</span> O dataset está registrado?
+  <span class="check">→ Admin → Datasets → Buscar (case sensitive!)</span>
+  <span class="action">→ Não aparece → deploy não funcionou. Refazer.</span>
+
+<span class="label">Passo 2:</span> Tem "return dataset;" no final?
+  <span class="check">→ Erro #1 mais comum.</span>
+  <span class="action">→ Abrir código e verificar última linha.</span>
+
+<span class="label">Passo 3:</span> Tem sintaxe ES6?
+  <span class="check">→ let, const, arrow function, template literal?</span>
+  <span class="action">→ Rhino retorna null sem mensagem clara.</span>
+
+<span class="label">Passo 4:</span> Chama API externa?
+  <span class="check">→ API acessível do SERVIDOR (não do browser)?</span>
+  <span class="action">→ Testar: curl [URL] a partir do servidor</span>
+
+<span class="label">Passo 5:</span> Constraint incorreto?
+  <span class="check">→ Campo inexistente → retorna vazio sem erro</span>
+  <span class="action">→ Testar SEM constraints para isolar</span></pre>
+                </div>
+            </div>
+
+            <div class="dbg">
+                <h3>&#128269; "O processo trava — não avança"</h3>
+                <div class="steps">
+                    <pre><span class="label">Passo 1:</span> Verificar Painel de Controle
+  <span class="check">→ Admin → Processos → Monitorar</span>
+  <span class="action">→ Em qual atividade está parado?</span>
+
+<span class="label">Passo 2:</span> Condições do Gateway
+  <span class="check">→ Gateway exclusivo: TODAS saídas precisam de condição</span>
+  <span class="action">→ Nenhuma atendida = trava sem erro</span>
+
+<span class="label">Passo 3:</span> Destinatário da próxima atividade
+  <span class="check">→ Tem destinatário definido? Usuário ativo?</span>
+  <span class="action">→ Mecanismo de atribuição configurado?</span>
+
+<span class="label">Passo 4:</span> Eventos com erro
+  <span class="check">→ beforeTaskComplete com exceção = não completa</span>
+  <span class="action">→ hAPI.setAutomaticDecision com ID errado?</span>
+
+<span class="label">Passo 5:</span> Log do servidor
+  <span class="check">→ WILDFLY_HOME/standalone/log/server.log</span>
+  <span class="action">→ Buscar ScriptException ou ID do documento</span></pre>
+                </div>
+            </div>
+
+            <div class="dbg">
+                <h3>&#128269; "O Style Guide não funciona"</h3>
+                <div class="steps">
+                    <pre><span class="label">Passo 1:</span> Tem o wrapper correto?
+  <span class="action">→ Precisa: &lt;div class="fluig-style-guide"&gt;</span>
+
+<span class="label">Passo 2:</span> Aberto dentro do Fluig?
+  <span class="action">→ Abrir file:// direto no browser não carrega Style Guide</span>
+
+<span class="label">Passo 3:</span> CSS customizado conflitando?
+  <span class="action">→ style="" inline ou &lt;style&gt; pode sobrescrever</span>
+
+<span class="label">Passo 4:</span> Versão do Fluig suporta o componente?
+  <span class="action">→ Componentes novos podem não existir em versões antigas</span></pre>
+                </div>
+            </div>
+        </section>
+
+        <div class="dv"></div>
+
+        <!-- ==================== DICAS AVANÇADAS ==================== -->
+        <section id="dicas">
+            <div class="sl">Nível sênior</div>
+            <div class="st">Dicas avançadas para o instrutor</div>
+
+            <div class="acc">
+                <div class="acc-h" onclick="tg(this)">
+                    <h4>Se perguntarem sobre performance</h4><span class="ch">&#9662;</span>
+                </div>
+                <div class="acc-b">
+                    <p>"O Fluig fica lento com muitos usuários. O que fazer?"</p>
+                    <p><strong>Verificar:</strong> <code>max-pool-size</code> no standalone.xml (pool de conexões),
+                        datasets sem constraint retornando milhares de registros, datasets jornalizados com intervalo
+                        muito curto, Solr desatualizado (re-indexar via admin), JVM com memória insuficiente (aumentar
+                        <code>-Xmx</code> no standalone.conf).</p>
+                </div>
+            </div>
+
+            <div class="acc">
+                <div class="acc-h" onclick="tg(this)">
+                    <h4>Se perguntarem sobre segurança</h4><span class="ch">&#9662;</span>
+                </div>
+                <div class="acc-b">
+                    <p>"O que impede um usuário de ver dados que não deveria?"</p>
+                    <p><strong>4 níveis:</strong> Permissões ECM (quem vê cada documento), atividades BPM (só
+                        destinatário vê a tarefa), datasets (podem verificar usuário logado e filtrar), portais (widgets
+                        restritos por papel/grupo).</p>
+                    <p><strong>CUIDADO:</strong> <code>displayFields</code> esconde visualmente, mas o dado AINDA ESTÁ
+                        no HTML. Para segurança real, use permissões backend.</p>
+                </div>
+            </div>
+
+            <div class="acc">
+                <div class="acc-h" onclick="tg(this)">
+                    <h4>Se perguntarem sobre versionamento de código</h4><span class="ch">&#9662;</span>
+                </div>
+                <div class="acc-b">
+                    <p>O Fluig <strong>não tem</strong> versionamento de código nativo (não é Git). Recomendação: usar
+                        Git externamente. O Studio exporta artefatos como arquivos — versione no Git. Para documentos
+                        ECM, o Fluig tem versionamento de documento (1.0, 2.0) — mas é para conteúdo, não para código.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <div class="ft">
+        <p>Guia de Estudo Avançado do Instrutor — Sessão 01 de 12</p>
+        <p style="margin-top:8px"><span class="jx">* JYNX</span> — Material interno, não distribuir aos alunos</p>
+    </div>
+    <button class="sb" id="sb" onclick="window.scrollTo({top:0})">&#8593;</button>
+
+    <script>
+        function tg(el) { var b = el.nextElementSibling; var c = el.querySelector('.ch'); var o = b.classList.contains('op'); if (o) { b.classList.remove('op'); c.classList.remove('op') } else { b.classList.add('op'); c.classList.add('op') } }
+        function cp(btn) { var block = btn.parentElement; var pre = block.querySelector('pre'); navigator.clipboard.writeText(pre.textContent).then(function () { btn.textContent = 'Copiado!'; btn.classList.add('ok'); setTimeout(function () { btn.textContent = 'Copiar'; btn.classList.remove('ok') }, 2000) }) }
+        window.addEventListener('scroll', function () { document.getElementById('sb').classList.toggle('sh', window.scrollY > 400) });
+    </script>
+</body>
+
+</html>

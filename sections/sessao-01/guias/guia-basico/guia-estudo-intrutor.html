@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Estudo do Instrutor — Sessão 01 | JYNX Fluig</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --orange: #E85D04;
+            --orange-light: #FF8C42;
+            --orange-glow: rgba(232, 93, 4, .12);
+            --dark: #0D0D12;
+            --dark2: #14141E;
+            --dark3: #1C1C2A;
+            --dark-card: #1A1A28;
+            --light: #F8F7F4;
+            --text: #E8E6E0;
+            --text-mid: #9D9B95;
+            --text-dim: #6B6964;
+            --green: #34D399;
+            --red: #F87171;
+            --blue: #60A5FA;
+            --purple: #A78BFA;
+            --mono: 'JetBrains Mono', monospace;
+            --sans: 'DM Sans', sans-serif;
+            --display: 'Playfair Display', serif;
+            --radius: 10px;
+            --radius-lg: 16px
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--dark);
+            color: var(--text);
+            font-family: var(--sans);
+            font-size: 16px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased
+        }
+
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(13, 13, 18, .85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(232, 93, 4, .15);
+            padding: 0 2rem;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .top-bar .logo {
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 2px;
+            color: var(--orange)
+        }
+
+        .top-bar nav {
+            display: flex;
+            gap: 8px
+        }
+
+        .top-bar nav a {
+            color: var(--text-mid);
+            text-decoration: none;
+            font-size: 13px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: all .2s
+        }
+
+        .top-bar nav a:hover {
+            color: var(--text);
+            background: rgba(255, 255, 255, .06)
+        }
+
+        .hero {
+            padding: 120px 2rem 60px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center
+        }
+
+        .hero .tag {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--red);
+            border: 1px solid rgba(248, 113, 113, .3);
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            background: rgba(248, 113, 113, .08)
+        }
+
+        .hero h1 {
+            font-family: var(--display);
+            font-size: clamp(30px, 5vw, 48px);
+            color: var(--light);
+            line-height: 1.15;
+            margin-bottom: 16px
+        }
+
+        .hero h1 span {
+            color: var(--orange)
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: var(--text-mid);
+            max-width: 600px;
+            margin: 0 auto
+        }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 2rem
+        }
+
+        section {
+            padding: 60px 0
+        }
+
+        .sl {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 8px
+        }
+
+        .st {
+            font-family: var(--display);
+            font-size: clamp(22px, 3.5vw, 34px);
+            color: var(--light);
+            margin-bottom: 20px;
+            line-height: 1.2
+        }
+
+        .sd {
+            color: var(--text-mid);
+            margin-bottom: 20px;
+            font-size: 15px
+        }
+
+        code {
+            font-family: var(--mono);
+            font-size: 12px;
+            background: rgba(232, 93, 4, .15);
+            color: var(--orange-light);
+            padding: 2px 6px;
+            border-radius: 4px
+        }
+
+        .card {
+            background: var(--dark-card);
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            margin-bottom: 14px;
+            transition: border-color .3s
+        }
+
+        .card:hover {
+            border-color: rgba(232, 93, 4, .2)
+        }
+
+        .card h3 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--light);
+            margin-bottom: 10px
+        }
+
+        .card p {
+            color: var(--text-mid);
+            font-size: 14px;
+            margin-bottom: 10px;
+            line-height: 1.7
+        }
+
+        .card p:last-child {
+            margin-bottom: 0
+        }
+
+        .card strong {
+            color: var(--text)
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 13px
+        }
+
+        th {
+            text-align: left;
+            padding: 10px 14px;
+            background: var(--dark3);
+            color: var(--orange);
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 2px solid rgba(232, 93, 4, .2)
+        }
+
+        td {
+            padding: 10px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, .04);
+            color: var(--text-mid);
+            vertical-align: top
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, .02)
+        }
+
+        .tip {
+            background: rgba(232, 93, 4, .08);
+            border-left: 3px solid var(--orange);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-size: 14px;
+            color: var(--text-mid);
+            line-height: 1.7
+        }
+
+        .tip strong {
+            color: var(--orange)
+        }
+
+        .warn {
+            background: rgba(248, 113, 113, .08);
+            border-left: 3px solid var(--red);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-size: 14px;
+            color: var(--text-mid);
+            line-height: 1.7
+        }
+
+        .warn strong {
+            color: var(--red)
+        }
+
+        .qa {
+            background: var(--dark-card);
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: var(--radius-lg);
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: border-color .3s
+        }
+
+        .qa:hover {
+            border-color: rgba(232, 93, 4, .2)
+        }
+
+        .qa-h {
+            padding: 18px 22px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            user-select: none
+        }
+
+        .qa-h .q {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--light);
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .qa-h .q .badge {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 5px;
+            background: rgba(96, 165, 250, .15);
+            color: var(--blue);
+            letter-spacing: .5px;
+            flex-shrink: 0
+        }
+
+        .qa-h .ch {
+            color: var(--text-dim);
+            transition: transform .3s;
+            font-size: 16px
+        }
+
+        .qa-h .ch.op {
+            transform: rotate(180deg)
+        }
+
+        .qa-b {
+            padding: 0 22px 22px;
+            display: none
+        }
+
+        .qa-b.op {
+            display: block
+        }
+
+        .qa-b p {
+            color: var(--text-mid);
+            font-size: 14px;
+            margin-bottom: 8px;
+            line-height: 1.7
+        }
+
+        .qa-b p:last-child {
+            margin-bottom: 0
+        }
+
+        .qa-b strong {
+            color: var(--text)
+        }
+
+        .err {
+            background: var(--dark-card);
+            border: 1px solid rgba(248, 113, 113, .15);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            margin-bottom: 14px
+        }
+
+        .err h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--red);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .err .when {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-bottom: 10px;
+            font-style: italic
+        }
+
+        .err p {
+            color: var(--text-mid);
+            font-size: 14px;
+            margin-bottom: 8px;
+            line-height: 1.7
+        }
+
+        .err p:last-child {
+            margin-bottom: 0
+        }
+
+        .err strong {
+            color: var(--text)
+        }
+
+        .err .speak {
+            background: rgba(232, 93, 4, .08);
+            border-radius: var(--radius);
+            padding: 12px 16px;
+            margin-top: 12px;
+            font-size: 14px;
+            color: var(--orange-light);
+            font-style: italic
+        }
+
+        .order {
+            display: grid;
+            grid-template-columns: auto 1fr auto auto;
+            gap: 0;
+            margin: 16px 0;
+            font-size: 14px
+        }
+
+        .order .row {
+            display: contents
+        }
+
+        .order .row>* {
+            padding: 10px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, .04)
+        }
+
+        .order .num {
+            color: var(--orange);
+            font-weight: 700;
+            font-family: var(--mono)
+        }
+
+        .order .topic {
+            color: var(--text)
+        }
+
+        .order .time {
+            color: var(--text-dim);
+            text-align: right
+        }
+
+        .order .pri {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-align: center;
+            height: fit-content;
+            align-self: center
+        }
+
+        .pri-e {
+            background: rgba(232, 93, 4, .15);
+            color: var(--orange-light)
+        }
+
+        .pri-r {
+            background: rgba(52, 211, 153, .1);
+            color: var(--green)
+        }
+
+        .pri-o {
+            background: rgba(255, 255, 255, .05);
+            color: var(--text-dim)
+        }
+
+        .ft {
+            text-align: center;
+            padding: 40px 2rem;
+            border-top: 1px solid rgba(255, 255, 255, .04);
+            margin-top: 40px
+        }
+
+        .ft p {
+            font-size: 13px;
+            color: var(--text-dim)
+        }
+
+        .ft .jx {
+            color: var(--orange);
+            font-weight: 700
+        }
+
+        .sb {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 40px;
+            height: 40px;
+            background: var(--orange);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity .3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50
+        }
+
+        .sb.sh {
+            opacity: 1
+        }
+
+        .dv {
+            height: 1px;
+            background: rgba(255, 255, 255, .04);
+            margin: 0
+        }
+
+        @media(max-width:640px) {
+            .top-bar nav {
+                display: none
+            }
+
+            .hero {
+                padding: 90px 1.5rem 40px
+            }
+
+            .container {
+                padding: 0 1.5rem
+            }
+
+            section {
+                padding: 40px 0
+            }
+
+            table {
+                font-size: 12px
+            }
+
+            th,
+            td {
+                padding: 8px 10px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-bar"><span class="logo">* J Y N X</span>
+        <nav><a href="#ordem">Ordem de estudo</a><a href="#arq">Arquitetura</a><a href="#perguntas">Perguntas</a><a
+                href="#erros">Erros propositais</a><a href="#glossario">Glossário</a></nav>
+    </div>
+
+    <div class="hero">
+        <div class="tag">Material exclusivo do instrutor</div>
+        <h1>Guia de Estudo — <span>Sessão 01</span></h1>
+        <p>Introdução, Ferramentas e Boas Práticas. Leia na noite anterior. Tempo estimado: 45-60 minutos.</p>
+    </div>
+
+    <div class="container">
+        <div class="dv"></div>
+
+        <section id="ordem">
+            <div class="sl">Preparação</div>
+            <div class="st">Ordem sugerida de estudo</div>
+            <p class="sd">Se tiver apenas 20 minutos, leia os itens 1, 2 e 4. São os que mais impactam sua confiança em
+                sala.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>O que estudar</th>
+                        <th>Tempo</th>
+                        <th>Prioridade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="color:var(--orange);font-weight:700">1</td>
+                        <td>Glossário de termos (final desta página)</td>
+                        <td>5 min</td>
+                        <td><span class="pri pri-e">Essencial</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color:var(--orange);font-weight:700">2</td>
+                        <td>Arquitetura do Fluig (3 camadas + Rhino)</td>
+                        <td>15 min</td>
+                        <td><span class="pri pri-e">Essencial</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color:var(--orange);font-weight:700">3</td>
+                        <td>Respostas para perguntas difíceis</td>
+                        <td>10 min</td>
+                        <td><span class="pri pri-e">Essencial</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color:var(--orange);font-weight:700">4</td>
+                        <td>Erros propositais preparados</td>
+                        <td>5 min</td>
+                        <td><span class="pri pri-r">Recomendado</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color:var(--orange);font-weight:700">5</td>
+                        <td>Navegar no Style Guide (style.fluig.com)</td>
+                        <td>10 min</td>
+                        <td><span class="pri pri-r">Recomendado</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color:var(--orange);font-weight:700">6</td>
+                        <td>Abrir Projeto Integrador e praticar navegação</td>
+                        <td>5 min</td>
+                        <td><span class="pri pri-o">Se tiver tempo</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div class="dv"></div>
+
+        <section id="arq">
+            <div class="sl">Domínio técnico</div>
+            <div class="st">Arquitetura do Fluig — em profundidade</div>
+
+            <div class="card">
+                <h3>O Fluig na essência</h3>
+                <p>O Fluig é uma <strong>plataforma corporativa da TOTVS</strong> que roda em cima de um servidor de
+                    aplicação Java chamado <strong>WildFly</strong> (antigo JBoss). Não é um produto único — é um
+                    ecossistema com 4 módulos integrados: <strong>ECM</strong> (documentos/formulários),
+                    <strong>BPM</strong> (workflows), <strong>WCM</strong> (portais/páginas), e
+                    <strong>Integração</strong> (datasets/APIs).</p>
+                <p>Todos os módulos rodam no <strong>mesmo servidor</strong>, no mesmo runtime Java. Não são
+                    microsserviços separados. Isso explica por que formulário conversa com processo, processo consulta
+                    dataset, e dataset alimenta widget — tudo está no mesmo "prédio".</p>
+            </div>
+
+            <div class="card">
+                <h3>Camada 1 — Browser (cliente)</h3>
+                <p>Tudo que roda no <strong>navegador do usuário</strong>. Engine V8 (Chrome) ou SpiderMonkey (Firefox)
+                    — JavaScript moderno ES6+, acesso completo ao DOM.</p>
+                <p><strong>O que executa aqui:</strong> Scripts dentro de <code>&lt;script&gt;</code> nos formulários,
+                    JavaScript de widgets, CSS do Style Guide, jQuery para manipulação de DOM, validações visuais,
+                    máscaras de campo.</p>
+                <p><strong>Tem acesso a:</strong> <code>document</code>, <code>window</code>, <code>console</code>, DOM
+                    completo, localStorage, fetch API — tudo que o browser oferece.</p>
+                <p><strong>Analogia:</strong> "É o JavaScript que vocês já conhecem. O mesmo que roda em qualquer site."
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Camada 2 — Servidor (Rhino JS)</h3>
+                <p>O Fluig usa o <strong>Mozilla Rhino</strong>, uma engine JavaScript escrita 100% em Java. O código JS
+                    roda <strong>dentro da JVM</strong>, no servidor — não no browser.</p>
+                <p><strong>O que executa aqui:</strong> Datasets (<code>createDataset</code>), eventos de formulário
+                    (<code>displayFields</code>, <code>validateForm</code>, <code>beforeTaskSave</code>, etc), eventos
+                    de processo, callbacks.</p>
+                <p><strong>NÃO tem acesso a:</strong> <code>document</code>, <code>window</code>, <code>console</code>,
+                    DOM, <code>fetch</code>, nada do browser. Só ES5 — sem <code>let</code>, <code>const</code>, arrow
+                    functions, template literals, async/await.</p>
+                <p><strong>Superpoder:</strong> Acesso direto a classes Java! <code>java.net.URL</code>,
+                    <code>java.util.HashMap</code>, <code>java.io.BufferedReader</code>, e todo o SDK:
+                    <code>hAPI</code>, <code>DatasetFactory</code>, <code>fluigAPI</code>.</p>
+                <p><strong>Analogia:</strong> "Existem dois mundos. O browser é colorido e moderno. O servidor é de 2010
+                    — mas tem acesso a todo o poder do Java."</p>
+            </div>
+
+            <div class="card">
+                <h3>Camada 3 — Banco + serviços Java</h3>
+                <p><strong>Banco:</strong> PostgreSQL, MySQL, Oracle ou SQL Server. Cada campo <code>name</code> de um
+                    formulário vira uma coluna na tabela. O desenvolvedor <strong>nunca</strong> acessa o banco
+                    diretamente — tudo via datasets e APIs.</p>
+                <p><strong>SDK:</strong> <code>hAPI</code> movimenta processos. <code>DatasetFactory</code> consulta
+                    datasets em eventos. <code>fluigAPI</code> acessa serviços internos. <code>WCMAPI</code> interage
+                    com portais.</p>
+                <p><strong>Solr:</strong> Motor de busca full-text. Pesquisas no Fluig são processadas pelo Solr, não
+                    por queries SQL.</p>
+            </div>
+
+            <div class="card">
+                <h3>Por que Rhino e não Node.js?</h3>
+                <p><strong>1. Integração nativa com Java:</strong> Rhino é escrito em Java. Código JS instancia classes
+                    Java diretamente: <code>var url = new java.net.URL("...")</code>. Com Node.js, seria necessária uma
+                    ponte entre JVM e V8 — complexidade extra.</p>
+                <p><strong>2. Sandbox controlado:</strong> O Rhino roda dentro da JVM com permissões restritas. Sem
+                    acesso a filesystem, sem sockets arbitrários. Segurança para ambiente multi-tenant.</p>
+                <p><strong>3. Decisão histórica:</strong> Fluig foi arquitetado nos anos 2010, quando Java EE era o
+                    padrão corporativo. Migrar agora seria reescrever a plataforma.</p>
+                <p><strong>4. Trade-off:</strong> Preso ao ES5, sem features modernas. Mas é estável e a integração com
+                    Java é o superpoder que justifica a limitação.</p>
+            </div>
+
+            <div class="card">
+                <h3>O atributo name — o contrato com o banco</h3>
+                <p><strong>Com <code>name="fornecedor"</code>:</strong> O Fluig cria automaticamente uma coluna
+                    "fornecedor" na tabela do formulário. Dado persiste.</p>
+                <p><strong>Sem <code>name</code>:</strong> O Fluig não sabe onde salvar. Dado some ao salvar. Erro #1 de
+                    iniciantes.</p>
+                <p><strong>Com <code>name</code> duplicado:</strong> Segundo valor sobrescreve o primeiro. Silencioso e
+                    difícil de debugar.</p>
+                <p><strong>Com caracteres especiais:</strong> Comportamento imprevisível. Usar sempre snake_case sem
+                    acentos: <code>nome_completo</code>, <code>data_admissao</code>.</p>
+            </div>
+
+            <div class="tip"><strong>Fluig Plataforma vs Identity:</strong> A Plataforma é onde tudo acontece (forms,
+                processos, portais). O Identity é um produto separado de Single Sign-On. Analogia: Identity é o
+                "porteiro" (quem é você?), Plataforma é o "prédio" (onde se trabalha). No treinamento, foco 100% na
+                Plataforma.</div>
+        </section>
+
+        <div class="dv"></div>
+
+        <section id="perguntas">
+            <div class="sl">Preparação para sala</div>
+            <div class="st">Perguntas difíceis e como responder</div>
+            <p class="sd">Clique em cada pergunta para ver a resposta sugerida. Essas perguntas APARECEM em sala —
+                esteja preparado.</p>
+
+            <div class="qa">
+                <div class="qa-h" onclick="t(this)">
+                    <div class="q"><span class="badge">Frequente</span>O Fluig é low-code ou high-code?</div><span
+                        class="ch">&#9662;</span>
+                </div>
+                <div class="qa-b">
+                    <p>É os dois. Para <strong>analistas</strong>: recursos low-code — processos BPM no editor visual,
+                        portais com drag-and-drop, Pages e Forms sem código. Para <strong>desenvolvedores</strong>:
+                        high-code — HTML/CSS/JS, datasets com lógica, integrações REST/SOAP, widgets avançados. O poder
+                        real aparece combinando as duas abordagens.</p>
+                </div>
+            </div>
+
+            <div class="qa">
+                <div class="qa-h" onclick="t(this)">
+                    <div class="q"><span class="badge">Frequente</span>Dá para usar React/Vue/Angular?</div><span
+                        class="ch">&#9662;</span>
+                </div>
+                <div class="qa-b">
+                    <p>Tecnicamente é possível injetar em widgets, mas <strong>não é recomendado</strong>. O Fluig tem
+                        seu ecossistema (Style Guide, jQuery, componentes nativos). Misturar frameworks gera problemas
+                        de compatibilidade, performance e manutenção. Use Style Guide + jQuery — caminho suportado
+                        oficialmente.</p>
+                </div>
+            </div>
+
+            <div class="qa">
+                <div class="qa-h" onclick="t(this)">
+                    <div class="q"><span class="badge">Frequente</span>Qual banco de dados recomendam?</div><span
+                        class="ch">&#9662;</span>
+                </div>
+                <div class="qa-b">
+                    <p>Suporta PostgreSQL, MySQL, Oracle e SQL Server. Depende da infra do cliente. Maioria usa SQL
+                        Server (por causa do Protheus) ou PostgreSQL. Para o <strong>desenvolvedor é
+                            irrelevante</strong> — nunca escreve SQL direto, tudo é abstraído por datasets.</p>
+                </div>
+            </div>
+
+            <div class="qa">
+                <div class="qa-h" onclick="t(this)">
+                    <div class="q"><span class="badge">Frequente</span>Preciso saber Java?</div><span
+                        class="ch">&#9662;</span>
+                </div>
+                <div class="qa-b">
+                    <p><strong>Não para o dia a dia.</strong> Você escreve JavaScript. Mas entender que existe Java por
+                        baixo ajuda a debugar e a usar classes Java quando necessário (ex: <code>java.net.URL</code>
+                        para integrações). O SDK expõe classes Java chamáveis do JS.</p>
+                </div>
+            </div>
+
+            <div class="qa">
+                <div class="qa-h" onclick="t(this)">
+                    <div class="q"><span class="badge">Frequente</span>O Fluig é cloud ou on-premise?</div><span
+                        class="ch">&#9662;</span>
+                </div>
+                <div class="qa-b">
+                    <p>Ambos. Pode rodar nos servidores da empresa ou na nuvem TOTVS. Arquitetura é a mesma — diferença
+                        é quem administra a infra. Para o desenvolvedor, o <strong>código é idêntico</strong> nos dois
+                        ambientes.</p>
+                </div>
+            </div>
+
+            <div class="qa">
+                <div class="qa-h" onclick="t(this)">
+                    <div class="q"><span class="badge">Técnica</span>O que acontece se usar let/const num dataset?</div>
+                    <span class="ch">&#9662;</span>
+                </div>
+                <div class="qa-b">
+                    <p><strong>Erro de sintaxe no servidor.</strong> O Rhino não entende ES6. O dataset não funciona —
+                        retorna erro ou null. O Fluig <strong>não valida</strong> a sintaxe JS no deploy, só quando
+                        executa. Então o deploy passa, mas o dataset falha silenciosamente na hora de usar.</p>
+                </div>
+            </div>
+
+            <div class="warn"><strong>Se não souber a resposta:</strong> "Boa pergunta — vou verificar na documentação
+                oficial e trago a resposta confirmada na próxima sessão." Anote, pesquise, traga depois. O aluno
+                respeita honestidade.</div>
+        </section>
+
+        <div class="dv"></div>
+
+        <section id="erros">
+            <div class="sl">Técnica pedagógica</div>
+            <div class="st">Erros propositais preparados</div>
+            <p class="sd">Mostrar o erro primeiro, deixar a turma diagnosticar, depois corrigir. Ensina debugging e
+                ganha tempo de forma inteligente.</p>
+
+            <div class="err">
+                <h3>&#9888; Erro 1: Campo sem name</h3>
+                <div class="when">Quando usar: ao explicar formulários e persistência (bloco dos 5 pilares)</div>
+                <p><strong>O que fazer:</strong> Criar formulário com 2 campos. Primeiro com
+                    <code>name="nome_completo"</code>. Segundo <strong>sem</strong> <code>name</code> (só
+                    <code>id</code>). Deployar, preencher ambos, salvar. Abrir registro — primeiro campo salvou, segundo
+                    está vazio.</p>
+                <div class="speak">"Viram? O primeiro campo salvou porque tem name. O segundo sumiu. O Fluig usa o name
+                    como endereço no banco. Sem endereço, o carteiro não sabe onde entregar."</div>
+                <p style="margin-top:10px;color:var(--text-dim)">Tempo ganho: 10-15 minutos de discussão + demonstração
+                </p>
+            </div>
+
+            <div class="err">
+                <h3>&#9888; Erro 2: ES6 no Rhino</h3>
+                <div class="when">Quando usar: ao explicar diferença browser vs servidor</div>
+                <p><strong>O que fazer:</strong> Mostrar código com <code>let</code>, arrow function. Perguntar: "Se eu
+                    colocar isso num dataset, o que acontece?" Demonstrar o erro se tiver acesso ao ambiente, ou
+                    explicar com slide.</p>
+                <div class="speak">"O Rhino olha para esse let e não entende. É como falar inglês com alguém que só fala
+                    português. A sintaxe parece familiar, mas ele não reconhece."</div>
+                <p style="margin-top:10px;color:var(--text-dim)">Tempo ganho: 5-10 minutos</p>
+            </div>
+
+            <div class="err">
+                <h3>&#9888; Erro 3: Confundir Plataforma com Identity</h3>
+                <div class="when">Quando usar: se alguém mencionar login, SSO, ou autenticação</div>
+                <p><strong>O que fazer:</strong> Perguntar "Alguém sabe a diferença entre Fluig Plataforma e Fluig
+                    Identity?" Deixar a turma especular, depois explicar com analogia porteiro/prédio.</p>
+                <div class="speak">"O Identity é o porteiro — verifica quem é você. A Plataforma é o prédio — onde o
+                    trabalho acontece. São produtos diferentes que se integram."</div>
+                <p style="margin-top:10px;color:var(--text-dim)">Tempo ganho: 5-10 minutos de discussão</p>
+            </div>
+        </section>
+
+        <div class="dv"></div>
+
+        <section id="glossario">
+            <div class="sl">Referência</div>
+            <div class="st">Glossário de termos técnicos</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Termo</th>
+                        <th>O que é</th>
+                        <th>Por que importa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>JBoss / WildFly</strong></td>
+                        <td>Servidor de aplicação Java</td>
+                        <td>É o "contêiner" onde o Fluig roda</td>
+                    </tr>
+                    <tr>
+                        <td><strong>JVM</strong></td>
+                        <td>Java Virtual Machine</td>
+                        <td>O Rhino roda dentro da JVM, por isso acessa classes Java</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rhino</strong></td>
+                        <td>Engine JS da Mozilla, escrita em Java</td>
+                        <td>Executa datasets e eventos no servidor (ES5 only)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ECM</strong></td>
+                        <td>Enterprise Content Management</td>
+                        <td>Módulo de documentos e formulários</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BPM</strong></td>
+                        <td>Business Process Management</td>
+                        <td>Módulo de workflows e processos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BPMN 2.0</strong></td>
+                        <td>Notação padrão de modelagem de processos</td>
+                        <td>Padrão internacional — vale fora do Fluig</td>
+                    </tr>
+                    <tr>
+                        <td><strong>WCM</strong></td>
+                        <td>Web Content Management</td>
+                        <td>Módulo de portais, páginas e widgets</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dataset</strong></td>
+                        <td>Função que retorna dados tabulares</td>
+                        <td>Forma padrão de buscar/processar dados</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Widget</strong></td>
+                        <td>Componente visual reutilizável</td>
+                        <td>Permite criar dashboards, gráficos, listas</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Style Guide</strong></td>
+                        <td>Sistema de design CSS (Bootstrap-based)</td>
+                        <td>Padrão visual obrigatório</td>
+                    </tr>
+                    <tr>
+                        <td><strong>hAPI</strong></td>
+                        <td>API Java para manipulação de workflows</td>
+                        <td>Mover processos via código</td>
+                    </tr>
+                    <tr>
+                        <td><strong>DatasetFactory</strong></td>
+                        <td>Classe para consultar datasets no servidor</td>
+                        <td>Usado em eventos para buscar dados</td>
+                    </tr>
+                    <tr>
+                        <td><strong>fluigAPI</strong></td>
+                        <td>API Java para serviços internos</td>
+                        <td>Acessar usuários, grupos, configs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Solr</strong></td>
+                        <td>Apache Solr — motor de busca full-text</td>
+                        <td>Processa buscas na plataforma</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Deploy</strong></td>
+                        <td>Enviar código para o servidor Fluig</td>
+                        <td>Artefato só funciona após deploy</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Constraint</strong></td>
+                        <td>Filtro aplicado a um dataset</td>
+                        <td>Performance — evita retornar tudo</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Jornalização</strong></td>
+                        <td>Cache automático de dataset</td>
+                        <td>Evita reconsultar dados estáticos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Evento de formulário</strong></td>
+                        <td>Função JS que executa em momentos do ciclo de vida</td>
+                        <td>beforeTaskSave, displayFields, validateForm...</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fluig Identity</strong></td>
+                        <td>Produto separado de SSO</td>
+                        <td>NÃO é a Plataforma — é autenticação</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fluig Studio</strong></td>
+                        <td>Plugin do Eclipse</td>
+                        <td>IDE oficial para desenvolver e deployar</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div class="dv"></div>
+
+        <section>
+            <div class="sl">Memorizar</div>
+            <div class="st">7 conceitos-chave</div>
+            <div class="card">
+                <p><strong style="color:var(--orange)">1.</strong> O Fluig é um <strong>monolito Java</strong> — todos
+                    os módulos (ECM, BPM, WCM) rodam no mesmo WildFly. Não são microsserviços.</p>
+            </div>
+            <div class="card">
+                <p><strong style="color:var(--orange)">2.</strong> Existem <strong>2 mundos de JavaScript</strong> —
+                    browser (ES6+, DOM) e servidor (Rhino ES5, Java). Nunca confundir.</p>
+            </div>
+            <div class="card">
+                <p><strong style="color:var(--orange)">3.</strong> O atributo <code>name</code> é sagrado — sem ele,
+                    dado não persiste. Com duplicado, sobrescreve. Com acento, quebra.</p>
+            </div>
+            <div class="card">
+                <p><strong style="color:var(--orange)">4.</strong> <strong>Dataset não é tabela</strong> — é uma função
+                    que retorna dados tabulares. Pode vir do banco, API, ou cálculo.</p>
+            </div>
+            <div class="card">
+                <p><strong style="color:var(--orange)">5.</strong> <strong>BPMN 2.0 é padrão internacional</strong> — o
+                    conhecimento vale em qualquer ferramenta BPM, não só Fluig.</p>
+            </div>
+            <div class="card">
+                <p><strong style="color:var(--orange)">6.</strong> <strong>Style Guide é obrigatório</strong> — CSS
+                    customizado que conflita quebra em atualizações da plataforma.</p>
+            </div>
+            <div class="card">
+                <p><strong style="color:var(--orange)">7.</strong> Nomenclatura é <strong>requisito técnico</strong> —
+                    <code>frm_</code>, <code>wkf_</code>, <code>ds_</code>, <code>wdg_</code>, <code>prt_</code>. Sem
+                    padrão, caos.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <div class="ft">
+        <p>Guia de Estudo do Instrutor — Sessão 01 de 12</p>
+        <p style="margin-top:8px"><span class="jx">* JYNX</span> — Material interno, não distribuir aos alunos</p>
+    </div>
+    <button class="sb" id="sb" onclick="window.scrollTo({top:0})">&#8593;</button>
+
+    <script>
+        function t(el) { var b = el.nextElementSibling; var c = el.querySelector('.ch'); var o = b.classList.contains('op'); document.querySelectorAll('.qa-b').forEach(function (x) { x.classList.remove('op') }); document.querySelectorAll('.qa-h .ch').forEach(function (x) { x.classList.remove('op') }); if (!o) { b.classList.add('op'); c.classList.add('op') } }
+        window.addEventListener('scroll', function () { document.getElementById('sb').classList.toggle('sh', window.scrollY > 400) });
+    </script>
+</body>
+
+</html>
