@@ -1,0 +1,89 @@
+<!--
+    01_html_puro_vs_fluig.html
+    Sessão 03 — Comparativo para o instrutor mostrar na tela
+    Treinamento Avançado | JYNX
+
+    INSTRUÇÕES: Mostrar os dois blocos lado a lado e perguntar
+    à turma: "O que mudou? Por quê?"
+-->
+
+<!-- ====================================================== -->
+<!-- BLOCO 1: HTML PURO (como um dev web faria)            -->
+<!-- ====================================================== -->
+<!--
+<form action="/salvar" method="POST">
+    <div>
+        <label>Nome:</label>
+        <input type="text" id="nome">
+    </div>
+    <div>
+        <label>Email:</label>
+        <input type="email" id="email">
+    </div>
+    <button type="submit">Salvar</button>
+</form>
+-->
+
+<!-- ====================================================== -->
+<!-- BLOCO 2: FORMULÁRIO FLUIG (com as convenções)          -->
+<!-- ====================================================== -->
+
+<!-- DIFERENÇA 1: Wrapper obrigatório do Style Guide -->
+<div class="fluig-style-guide" style="padding: 20px;">
+
+    <!-- DIFERENÇA 2: Sem <form action="...">, o Fluig gerencia o submit -->
+    <!-- DIFERENÇA 3: Usa panel para agrupamento visual -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Cadastro</h3>
+        </div>
+        <div class="panel-body">
+
+            <!-- DIFERENÇA 4: Grid do Style Guide para layout -->
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- DIFERENÇA 5: form-group + form-control (Style Guide) -->
+                    <div class="form-group">
+                        <label for="nome_completo">Nome:</label>
+                        <!-- DIFERENÇA 6: Atributo name OBRIGATÓRIO para persistir -->
+                        <!-- DIFERENÇA 7: name em snake_case, sem acentos -->
+                        <input type="text" class="form-control" id="nome_completo" name="nome_completo">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- DIFERENÇA 8: Botões com classes do Style Guide, sem type="submit" -->
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button type="button" class="btn btn-primary">Salvar</button>
+        </div>
+    </div>
+
+</div>
+
+<!--
+    RESUMO DAS 8 DIFERENÇAS:
+    1. Wrapper <div class="fluig-style-guide"> obrigatório
+    2. Sem <form action="...">, Fluig gerencia o submit
+    3. Usa panel para agrupamento visual
+    4. Grid do Style Guide (row + col-md-X)
+    5. form-group + form-control para estilos
+    6. Atributo "name" OBRIGATÓRIO em cada campo
+    7. name em snake_case, sem acentos, sem espaços
+    8. Botões com classes btn do Style Guide
+
+    NUNCA FAZER:
+    - Importar Bootstrap via CDN (já vem no Style Guide)
+    - Usar name com acentos (nome_funcionário → nome_funcionario)
+    - Usar name com espaços ("nome completo" → nome_completo)
+    - Esquecer o name (dado não salva!)
+-->

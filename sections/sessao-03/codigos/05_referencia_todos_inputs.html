@@ -1,0 +1,291 @@
+<!--
+    05_referencia_todos_inputs.html
+    Sessão 03 — Referência completa de todos os tipos de input
+    Treinamento Avançado | JYNX
+
+    Este formulário serve como CATÁLOGO de referência.
+    Cada tipo de input está documentado com comentários.
+    Alunos podem consultar depois como "cola".
+-->
+
+<div class="fluig-style-guide" style="padding: 20px;">
+
+    <!-- ========== TEXT ========== -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Text — Texto simples</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="ex_text">Text básico</label>
+                        <input type="text" class="form-control" id="ex_text" name="ex_text" placeholder="Texto livre">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="ex_text_req">Text obrigatório</label>
+                        <input type="text" class="form-control" id="ex_text_req" name="ex_text_req"
+                            placeholder="Campo obrigatório" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="ex_text_ro">Text readonly</label>
+                        <input type="text" class="form-control" id="ex_text_ro" name="ex_text_ro" value="Valor fixo"
+                            readonly>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="ex_text_dis">Text disabled</label>
+                        <input type="text" class="form-control" id="ex_text_dis" name="ex_text_dis" value="Desabilitado"
+                            disabled>
+                        <!-- ATENÇÃO: campo disabled NÃO envia dados no submit! -->
+                        <!-- Use readonly se quiser que o dado persista -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== EMAIL / NUMBER / DATE ========== -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Email, Number, Date — Tipos especializados</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="ex_email">Email</label>
+                        <!-- Valida formato automaticamente -->
+                        <input type="email" class="form-control" id="ex_email" name="ex_email"
+                            placeholder="nome@email.com">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="ex_number">Number</label>
+                        <!-- Aceita apenas números, com step para decimais -->
+                        <input type="number" class="form-control" id="ex_number" name="ex_number" placeholder="0,00"
+                            min="0" step="0.01">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="ex_date">Date</label>
+                        <!-- Renderiza datepicker nativo do browser -->
+                        <input type="date" class="form-control" id="ex_date" name="ex_date">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== SELECT ========== -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Select — Lista suspensa</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="ex_select">Select básico</label>
+                        <!-- O VALUE da option é o que salva, não o texto -->
+                        <select class="form-control" id="ex_select" name="ex_select">
+                            <option value="">Selecione...</option>
+                            <option value="opcao_1">Opção 1</option>
+                            <option value="opcao_2">Opção 2</option>
+                            <option value="opcao_3">Opção 3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="ex_select_multi">Select múltiplo</label>
+                        <select class="form-control" multiple id="ex_select_multi" name="ex_select_multi"
+                            style="height: 100px;">
+                            <option value="a">Item A</option>
+                            <option value="b">Item B</option>
+                            <option value="c">Item C</option>
+                            <option value="d">Item D</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== TEXTAREA ========== -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Textarea — Texto multilinha</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="ex_textarea">Textarea</label>
+                        <!-- rows controla a altura inicial -->
+                        <textarea class="form-control" id="ex_textarea" name="ex_textarea" rows="4"
+                            placeholder="Texto longo aqui..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== RADIO ========== -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Radio — Seleção única</h3>
+        </div>
+        <div class="panel-body">
+            <!-- Formato empilhado -->
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Radio empilhado:</label>
+                    <div class="radio">
+                        <label>
+                            <!-- Mesmo name = grupo. Só 1 pode ser selecionado -->
+                            <input type="radio" name="ex_radio" value="sim"> Sim
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="ex_radio" value="nao"> Não
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="ex_radio" value="talvez"> Talvez
+                        </label>
+                    </div>
+                </div>
+                <!-- Formato inline -->
+                <div class="col-md-6">
+                    <label>Radio inline:</label><br>
+                    <label class="radio-inline">
+                        <input type="radio" name="ex_radio_inline" value="a"> Opção A
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="ex_radio_inline" value="b"> Opção B
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="ex_radio_inline" value="c"> Opção C
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== CHECKBOX ========== -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Checkbox — Seleção múltipla</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Checkbox empilhado:</label>
+                    <!-- Cada checkbox pode ter name diferente -->
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="opt_email" value="S">
+                            Receber por e-mail
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="opt_sms" value="S">
+                            Receber por SMS
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="opt_push" value="S">
+                            Receber notificação push
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label>Checkbox inline:</label><br>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="dia_seg" value="S"> Seg
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="dia_ter" value="S"> Ter
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="dia_qua" value="S"> Qua
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="dia_qui" value="S"> Qui
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="dia_sex" value="S"> Sex
+                    </label>
+                    <!-- ATENÇÃO: checkbox só envia valor se MARCADO -->
+                    <!-- Se desmarcado, o campo não é enviado no submit -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== HIDDEN ========== -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Hidden — Campo invisível</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Campos hidden guardam dados sem mostrar ao usuário -->
+                    <!-- Útil para: IDs, códigos de controle, dados calculados -->
+                    <input type="hidden" id="ex_hidden" name="codigo_interno" value="ABC123">
+                    <input type="hidden" id="ex_hidden2" name="usuario_criacao" value="">
+
+                    <div class="alert alert-info">
+                        Campos <code>hidden</code> não aparecem na tela mas salvam dados normalmente.
+                        Use para IDs, códigos internos, e dados preenchidos via JavaScript.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== BOTÕES ========== -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Buttons — Botões de ação</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-primary">Primary (ação principal)</button>
+                    <button type="button" class="btn btn-default">Default (secundária)</button>
+                    <button type="button" class="btn btn-danger">Danger (destrutiva)</button>
+                    <button type="button" class="btn btn-success">Success (confirmação)</button>
+                    <button type="button" class="btn btn-warning">Warning (atenção)</button>
+                    <button type="button" class="btn btn-info">Info (informativa)</button>
+                    <button type="button" class="btn btn-link">Link (discreta)</button>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-primary btn-lg">Grande (btn-lg)</button>
+                    <button type="button" class="btn btn-primary">Normal</button>
+                    <button type="button" class="btn btn-primary btn-sm">Pequeno (btn-sm)</button>
+                    <button type="button" class="btn btn-primary btn-xs">Mini (btn-xs)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

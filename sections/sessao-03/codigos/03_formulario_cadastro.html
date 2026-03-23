@@ -1,0 +1,248 @@
+<!--
+    03_formulario_cadastro.html
+    Sessão 03 — Formulário construído no live coding
+    Treinamento Avançado | JYNX
+
+    INSTRUÇÃO PARA O INSTRUTOR:
+    Construa este formulário campo a campo, narrando cada decisão.
+    A cada 2-3 campos, faça deploy e teste. Não cole tudo de uma vez.
+
+    Este é o resultado FINAL. Use como referência durante o live coding.
+-->
+
+<div class="fluig-style-guide" style="padding: 20px;">
+
+    <!-- ======================================== -->
+    <!-- PAINEL 1: Dados Pessoais                 -->
+    <!-- ======================================== -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Dados Pessoais</h3>
+        </div>
+        <div class="panel-body">
+
+            <!-- Linha 1: Nome + Email -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="nome_completo">Nome Completo</label>
+                        <input type="text" class="form-control" id="nome_completo" name="nome_completo"
+                            placeholder="Digite o nome completo" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="email">E-mail Corporativo</label>
+                        <!-- type="email" dá validação nativa do browser -->
+                        <input type="email" class="form-control" id="email" name="email" placeholder="nome@empresa.com">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Linha 2: Data nascimento + CPF -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="data_nascimento">Data de Nascimento</label>
+                        <!-- type="date" renderiza o datepicker nativo -->
+                        <input type="date" class="form-control" id="data_nascimento" name="data_nascimento">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="cpf">CPF</label>
+                        <input type="text" class="form-control" id="cpf" name="cpf" placeholder="000.000.000-00"
+                            maxlength="14">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="telefone">Telefone</label>
+                        <input type="text" class="form-control" id="telefone" name="telefone"
+                            placeholder="(00) 00000-0000">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ======================================== -->
+    <!-- PAINEL 2: Dados Profissionais            -->
+    <!-- ======================================== -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Dados Profissionais</h3>
+        </div>
+        <div class="panel-body">
+
+            <!-- Linha 3: Departamento + Cargo -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="departamento">Departamento</label>
+                        <!-- SELECT: o value da option é o que salva no banco,
+                             não o texto visível -->
+                        <select class="form-control" id="departamento" name="departamento">
+                            <option value="">Selecione...</option>
+                            <option value="TI">Tecnologia da Informação</option>
+                            <option value="RH">Recursos Humanos</option>
+                            <option value="FIN">Financeiro</option>
+                            <option value="COM">Compras</option>
+                            <option value="ADM">Administrativo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="cargo">Cargo</label>
+                        <input type="text" class="form-control" id="cargo" name="cargo"
+                            placeholder="Ex: Analista de Sistemas">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Linha 4: Tipo de contrato (Radio) -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Tipo de Contrato</label><br>
+                        <!-- RADIO: mesmo name = grupo de seleção única -->
+                        <!-- O value do selecionado é o que salva -->
+                        <label class="radio-inline">
+                            <input type="radio" name="tipo_contrato" value="CLT" checked> CLT
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="tipo_contrato" value="PJ"> PJ
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="tipo_contrato" value="estagio"> Estágio
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="tipo_contrato" value="temporario"> Temporário
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Linha 5: Salário (number) + Data admissão -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="salario">Salário (R$)</label>
+                        <!-- type="number" com step para decimais -->
+                        <input type="number" class="form-control" id="salario" name="salario" placeholder="0,00"
+                            step="0.01" min="0">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="data_admissao">Data de Admissão</label>
+                        <input type="date" class="form-control" id="data_admissao" name="data_admissao">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ======================================== -->
+    <!-- PAINEL 3: Observações                    -->
+    <!-- ======================================== -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Observações</h3>
+        </div>
+        <div class="panel-body">
+
+            <!-- Textarea -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="observacoes">Observações Adicionais</label>
+                        <textarea class="form-control" id="observacoes" name="observacoes" rows="4"
+                            placeholder="Informações complementares..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Checkbox -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="checkbox">
+                        <label>
+                            <!-- CHECKBOX: só envia o value se estiver marcado -->
+                            <input type="checkbox" name="aceite_termos" value="S">
+                            Li e aceito os termos e condições
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ======================================== -->
+    <!-- BOTÕES DE AÇÃO                           -->
+    <!-- ======================================== -->
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button type="button" class="btn btn-default">Cancelar</button>
+            <button type="button" class="btn btn-primary">Salvar</button>
+        </div>
+    </div>
+
+</div>
+
+<!-- SCRIPT: Helpers do Fluig + Validação básica -->
+<script>
+    $(document).ready(function () {
+
+        // =============================================
+        // HELPER 1: Preencher solicitante automaticamente
+        // =============================================
+        // WCMAPI.getUser() retorna o login do usuário logado
+        // Descomente a linha abaixo em ambiente Fluig real:
+        // $('#nome_completo').val(WCMAPI.getUser());
+
+        // =============================================
+        // HELPER 2: Preencher data de admissão com hoje
+        // =============================================
+        var hoje = new Date().toISOString().split('T')[0];
+        $('#data_admissao').val(hoje);
+
+        // =============================================
+        // MÁSCARA DE CPF (se jQuery Mask estiver disponível)
+        // =============================================
+        if ($.fn.mask) {
+            $('#cpf').mask('000.000.000-00');
+            $('#telefone').mask('(00) 00000-0000');
+        }
+
+        // =============================================
+        // VALIDAÇÃO BÁSICA COM JQUERY
+        // =============================================
+        $('.btn-primary').click(function () {
+            // Validar nome obrigatório
+            if ($('#nome_completo').val().trim() === '') {
+                alert('O campo Nome Completo é obrigatório!');
+                $('#nome_completo').focus();
+                return false;
+            }
+
+            // Validar departamento selecionado
+            if ($('#departamento').val() === '') {
+                alert('Selecione um departamento!');
+                $('#departamento').focus();
+                return false;
+            }
+
+            // Validar aceite dos termos
+            if (!$('input[name="aceite_termos"]').is(':checked')) {
+                alert('Você precisa aceitar os termos e condições!');
+                return false;
+            }
+        });
+
+    });
+</script>

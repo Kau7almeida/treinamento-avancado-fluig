@@ -1,0 +1,58 @@
+<!--
+    02_erro_sem_name.html
+    Sessão 03 — Erro Proposital: campo sem atributo name
+    Treinamento Avançado | JYNX
+
+    INSTRUÇÃO: Deployar este formulário, preencher os dois campos,
+    salvar, e abrir o registro. O campo "Apelido" estará vazio
+    porque NÃO TEM o atributo name.
+-->
+
+<div class="fluig-style-guide" style="padding: 20px;">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Teste de Persistência</h3>
+        </div>
+        <div class="panel-body">
+
+            <div class="row">
+                <!-- CAMPO 1: COM name → VAI SALVAR -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="nome_completo">Nome Completo</label>
+                        <input type="text" class="form-control" id="nome_completo" name="nome_completo"
+                            placeholder="Este campo VAI salvar">
+                    </div>
+                </div>
+
+                <!-- CAMPO 2: SEM name → NÃO VAI SALVAR -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="apelido">Apelido</label>
+                        <!-- PROPOSITALMENTE sem name! -->
+                        <input type="text" class="form-control" id="apelido" placeholder="Este campo NÃO vai salvar">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="alert alert-warning">
+        <strong>Exercício:</strong> Preencha os dois campos e salve.
+        Depois abra o registro novamente. O que aconteceu com o campo "Apelido"?
+    </div>
+
+</div>
+
+<!--
+    APÓS A DEMONSTRAÇÃO, corrigir ao vivo:
+    Adicionar name="apelido" no segundo campo e refazer o deploy.
+    Mostrar que agora salva.
+
+    VERSÃO CORRIGIDA:
+    <input type="text" class="form-control"
+           id="apelido" name="apelido"
+           placeholder="Agora este campo VAI salvar">
+-->

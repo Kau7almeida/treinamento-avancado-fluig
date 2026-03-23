@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sessão 03 — Formulários Customizados e Dinâmicos | JYNX Fluig</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--o:#E85D04;--ol:#FF8C42;--og:rgba(232,93,4,.12);--dk:#0D0D12;--dk2:#14141E;--dk3:#1C1C2A;--dkc:#1A1A28;--lt:#F8F7F4;--tx:#E8E6E0;--tm:#9D9B95;--td:#6B6964;--g:#34D399;--r:#F87171;--b:#60A5FA;--y:#FBBF24;--mono:'JetBrains Mono',monospace;--sans:'DM Sans',sans-serif;--disp:'Playfair Display',serif;--rad:10px;--radl:16px}
+html{scroll-behavior:smooth}
+body{background:var(--dk);color:var(--tx);font-family:var(--sans);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.bar{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,13,18,.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(232,93,4,.15);padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between}
+.bar .logo{font-weight:700;font-size:15px;letter-spacing:2px;color:var(--o)}
+.bar nav{display:flex;gap:6px}
+.bar nav a{color:var(--tm);text-decoration:none;font-size:12px;padding:6px 10px;border-radius:6px;transition:all .2s}
+.bar nav a:hover{color:var(--tx);background:rgba(255,255,255,.06)}
+.hero{padding:120px 2rem 60px;max-width:900px;margin:0 auto;text-align:center}
+.hero .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--o);border:1px solid rgba(232,93,4,.3);padding:6px 16px;border-radius:20px;margin-bottom:20px}
+.hero h1{font-family:var(--disp);font-size:clamp(30px,5vw,48px);color:var(--lt);line-height:1.15;margin-bottom:16px}
+.hero h1 span{color:var(--o)}
+.hero p{font-size:17px;color:var(--tm);max-width:600px;margin:0 auto}
+.ct{max-width:860px;margin:0 auto;padding:0 2rem}
+section{padding:55px 0}
+.sl{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--o);margin-bottom:8px}
+.st{font-family:var(--disp);font-size:clamp(22px,3.5vw,32px);color:var(--lt);margin-bottom:20px;line-height:1.2}
+.st2{font-size:20px;font-weight:700;color:var(--lt);margin:28px 0 12px}
+.sd{color:var(--tm);margin-bottom:20px;font-size:15px}
+code{font-family:var(--mono);font-size:12px;background:rgba(232,93,4,.15);color:var(--ol);padding:2px 6px;border-radius:4px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}
+th{text-align:left;padding:10px 14px;background:var(--dk3);color:var(--o);font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase;border-bottom:2px solid rgba(232,93,4,.2)}
+td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--tm);vertical-align:top}
+tr:hover td{background:rgba(255,255,255,.02)}
+.tip{background:rgba(232,93,4,.08);border-left:3px solid var(--o);border-radius:0 var(--rad) var(--rad) 0;padding:14px 18px;margin:18px 0;font-size:14px;color:var(--tm);line-height:1.7}
+.tip strong{color:var(--o)}
+.warn{background:rgba(248,113,113,.08);border-left:3px solid var(--r);border-radius:0 var(--rad) var(--rad) 0;padding:14px 18px;margin:18px 0;font-size:14px;color:var(--tm)}
+.warn strong{color:var(--r)}
+.cb{background:var(--dk2);border:1px solid rgba(255,255,255,.06);border-radius:var(--rad);padding:18px;margin:14px 0;overflow-x:auto;position:relative}
+.cb pre{font-family:var(--mono);font-size:12.5px;line-height:1.8;color:var(--tm);white-space:pre;margin:0}
+.cb .tg{color:var(--o);font-weight:500}
+.cb .cm{color:var(--td)}
+.cb .ok{color:var(--g)}
+.cb .no{color:var(--r)}
+.cb .vl{color:var(--b)}
+.cb .st{color:var(--y);font-family:var(--mono);font-size:12.5px;margin:0;line-height:1.8}
+.copy{position:absolute;top:10px;right:10px;background:rgba(232,93,4,.2);border:none;color:var(--ol);font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 10px;border-radius:4px;cursor:pointer;text-transform:uppercase;transition:background .2s;z-index:2}
+.copy:hover{background:rgba(232,93,4,.4)}
+.copy.ok{background:rgba(52,211,153,.2);color:var(--g)}
+.hier{margin:14px 0}
+.hier-item{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:8px;margin-bottom:4px;transition:background .2s}
+.hier-item:hover{background:rgba(255,255,255,.03)}
+.hier-code{font-family:var(--mono);font-size:13px;color:var(--tm);flex:1}
+.hier-desc{font-size:13px;color:var(--td);min-width:140px;text-align:right}
+.hier-item.highlight{background:var(--og);border-left:3px solid var(--o)}
+.hier-item.highlight .hier-code{color:var(--ol)}
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:16px 0}
+.comp{background:var(--dkc);border:1px solid rgba(255,255,255,.06);border-radius:var(--rad);padding:16px;transition:border-color .3s}
+.comp:hover{border-color:rgba(232,93,4,.2)}
+.comp h4{font-size:14px;font-weight:700;color:var(--lt);margin-bottom:3px}
+.comp .cls{font-family:var(--mono);font-size:11px;color:var(--ol);margin-bottom:4px}
+.comp p{font-size:12px;color:var(--td)}
+.lg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.lc{background:var(--dkc);border:1px solid rgba(255,255,255,.06);border-radius:var(--rad);padding:16px 20px;text-decoration:none;display:flex;align-items:center;gap:12px;transition:all .2s}
+.lc:hover{border-color:rgba(232,93,4,.3);transform:translateY(-1px)}
+.lc .li{width:36px;height:36px;border-radius:8px;background:var(--og);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.lc h5{font-size:14px;font-weight:700;color:var(--lt);margin-bottom:2px}
+.lc .lt{font-size:12px;color:var(--td);margin:0}
+.ft{text-align:center;padding:40px 2rem;border-top:1px solid rgba(255,255,255,.04);margin-top:40px}
+.ft p{font-size:13px;color:var(--td)}
+.ft .jx{color:var(--o);font-weight:700}
+.sb{position:fixed;bottom:24px;right:24px;width:40px;height:40px;background:var(--o);border:none;border-radius:50%;color:#fff;font-size:18px;cursor:pointer;opacity:0;transition:opacity .3s;display:flex;align-items:center;justify-content:center;z-index:50}
+.sb.sh{opacity:1}
+.dv{height:1px;background:rgba(255,255,255,.04);margin:0}
+@media(max-width:640px){.bar nav{display:none}.hero{padding:90px 1.5rem 40px}.ct{padding:0 1.5rem}section{padding:36px 0}.comp-grid{grid-template-columns:1fr}.lg{grid-template-columns:1fr}table{font-size:11px}th,td{padding:8px 10px}}
+</style>
+</head>
+<body>
+<div class="bar"><span class="logo">* J Y N X</span><nav><a href="#anatomia">Anatomia</a><a href="#inputs">Inputs</a><a href="#helpers">Helpers</a><a href="#validacao">Validação</a><a href="#codigos">Códigos</a><a href="#links">Links</a></nav></div>
+
+<div class="hero"><div class="tag">Sessão 03 de 12</div><h1>Formulários Customizados e <span>Dinâmicos</span></h1><p>Anatomia de um formulário Fluig, todos os tipos de input, helpers nativos, validações em camadas, e boas práticas de construção.</p></div>
+
+<div class="ct">
+<div class="dv"></div>
+
+<section id="anatomia">
+<div class="sl">Estrutura</div>
+<div class="st">Anatomia de um formulário Fluig</div>
+<p class="sd">Um formulário Fluig É HTML — com convenções obrigatórias. Sem elas, os dados não salvam e os estilos não funcionam.</p>
+
+<div class="hier">
+<div class="hier-item"><span class="hier-code">&lt;div class="fluig-style-guide"&gt;</span><span class="hier-desc">Wrapper obrigatório</span></div>
+<div class="hier-item" style="padding-left:28px"><span class="hier-code">&lt;div class="panel panel-default"&gt;</span><span class="hier-desc">Agrupamento visual</span></div>
+<div class="hier-item" style="padding-left:56px"><span class="hier-code">&lt;div class="row"&gt;</span><span class="hier-desc">Linha do grid</span></div>
+<div class="hier-item" style="padding-left:84px"><span class="hier-code">&lt;div class="col-md-6"&gt;</span><span class="hier-desc">Coluna (soma = 12)</span></div>
+<div class="hier-item" style="padding-left:112px"><span class="hier-code">&lt;div class="form-group"&gt;</span><span class="hier-desc">Container do campo</span></div>
+<div class="hier-item highlight" style="padding-left:140px"><span class="hier-code">&lt;label&gt; + &lt;input name="..."&gt;</span><span class="hier-desc">Label + campo com name</span></div>
+</div>
+
+<div class="cb"><button class="copy" onclick="cp(this)">Copiar</button><pre>
+<span class="tg">&lt;div class="fluig-style-guide"</span> style="padding: 20px;"&gt;
+  &lt;div class="panel panel-default"&gt;
+    &lt;div class="panel-heading"&gt;
+      &lt;h3 class="panel-title"&gt;Título&lt;/h3&gt;
+    &lt;/div&gt;
+    &lt;div class="panel-body"&gt;
+      <span class="vl">&lt;div class="row"&gt;</span>
+        &lt;div class="col-md-6"&gt;
+          &lt;div class="form-group"&gt;
+            &lt;label for="campo"&gt;Label&lt;/label&gt;
+            &lt;input type="text" class="form-control"
+                   <span class="ok">id="campo" name="campo"</span>&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      <span class="vl">&lt;/div&gt;</span>
+    &lt;/div&gt;
+  &lt;/div&gt;
+<span class="tg">&lt;/div&gt;</span></pre></div>
+
+<div class="st2">Regras do atributo name</div>
+<table>
+<thead><tr><th>Regra</th><th style="color:var(--g)">Correto</th><th style="color:var(--r)">Errado</th></tr></thead>
+<tbody>
+<tr><td>Snake case</td><td style="color:var(--g)"><code>nome_completo</code></td><td style="color:var(--r)"><code>nomeCompleto</code></td></tr>
+<tr><td>Sem acentos</td><td style="color:var(--g)"><code>descricao</code></td><td style="color:var(--r)"><code>descrição</code></td></tr>
+<tr><td>Sem espaços</td><td style="color:var(--g)"><code>data_nascimento</code></td><td style="color:var(--r)"><code>data nascimento</code></td></tr>
+<tr><td>Sem hífens</td><td style="color:var(--g)"><code>centro_custo</code></td><td style="color:var(--r)"><code>centro-custo</code></td></tr>
+<tr><td>Único por campo</td><td style="color:var(--g)">Um name por campo</td><td style="color:var(--r)">Dois campos com mesmo name</td></tr>
+</tbody>
+</table>
+<div class="warn"><strong>Campo sem name = dado perdido.</strong> Campo disabled = dado NÃO enviado (use <code>readonly</code> para manter o dado).</div>
+</section>
+
+<div class="dv"></div>
+
+<section id="inputs">
+<div class="sl">Elementos</div>
+<div class="st">Todos os tipos de input</div>
+
+<table>
+<thead><tr><th>Tipo</th><th>HTML</th><th>Salva como</th></tr></thead>
+<tbody>
+<tr><td>Texto</td><td><code>&lt;input type="text" name="x"&gt;</code></td><td>String</td></tr>
+<tr><td>Email</td><td><code>&lt;input type="email" name="x"&gt;</code></td><td>String (validado)</td></tr>
+<tr><td>Número</td><td><code>&lt;input type="number" name="x"&gt;</code></td><td>String</td></tr>
+<tr><td>Data</td><td><code>&lt;input type="date" name="x"&gt;</code></td><td>YYYY-MM-DD</td></tr>
+<tr><td>Select</td><td><code>&lt;select name="x"&gt;&lt;option value="v"&gt;</code></td><td>O value da option</td></tr>
+<tr><td>Radio</td><td><code>&lt;input type="radio" name="x" value="v"&gt;</code></td><td>Value do selecionado</td></tr>
+<tr><td>Checkbox</td><td><code>&lt;input type="checkbox" name="x" value="S"&gt;</code></td><td>Só se marcado</td></tr>
+<tr><td>Textarea</td><td><code>&lt;textarea name="x"&gt;</code></td><td>String multilinha</td></tr>
+<tr><td>Hidden</td><td><code>&lt;input type="hidden" name="x" value="v"&gt;</code></td><td>String (invisível)</td></tr>
+</tbody>
+</table>
+
+<div class="tip"><strong>Select:</strong> O <code>value</code> da <code>&lt;option&gt;</code> é o que salva no banco, não o texto visível. <strong>Radio:</strong> Todos com o mesmo <code>name</code> formam grupo — só um pode ser selecionado. <strong>Checkbox:</strong> Só envia o valor se estiver marcado.</div>
+</section>
+
+<div class="dv"></div>
+
+<section id="helpers">
+<div class="sl">Atalhos nativos</div>
+<div class="st">Helpers do Fluig</div>
+<p class="sd">Funções JavaScript disponibilizadas pelo Fluig no browser para uso em formulários.</p>
+
+<div class="cb"><button class="copy" onclick="cp(this)">Copiar</button><pre>
+<span class="cm">// Usuário logado</span>
+<span class="ok">WCMAPI.getUser()</span>           <span class="cm">// retorna login</span>
+<span class="ok">WCMAPI.getUserCode()</span>       <span class="cm">// retorna código numérico</span>
+
+<span class="cm">// Modo do formulário</span>
+<span class="vl">document.getElementById("___FORM_MODE___")</span>
+<span class="cm">// "ADD" = novo | "MOD" = editando | "VIEW" = visualizando</span>
+
+<span class="cm">// Número do documento</span>
+<span class="vl">document.getElementById("___NUM_DOCUMENT___")</span>
+
+<span class="cm">// Data de hoje (formato YYYY-MM-DD)</span>
+var hoje = new Date().toISOString().split('T')[0];</pre></div>
+</section>
+
+<div class="dv"></div>
+
+<section id="validacao">
+<div class="sl">Segurança</div>
+<div class="st">Validação em 3 camadas</div>
+
+<div class="comp-grid" style="grid-template-columns:repeat(3,1fr)">
+<div class="comp" style="border-top:3px solid var(--g)"><h4>Camada 1</h4><div class="cls">HTML nativo</div><p><code>required</code>, <code>type="email"</code>, <code>min</code>, <code>max</code>, <code>maxlength</code>. Grátis, sem JS.</p></div>
+<div class="comp" style="border-top:3px solid var(--o)"><h4>Camada 2</h4><div class="cls">jQuery (browser)</div><p>Regras de negócio, validações complexas, feedback visual.</p></div>
+<div class="comp" style="border-top:3px solid var(--b)"><h4>Camada 3</h4><div class="cls">validateForm (servidor)</div><p>Linha final de defesa. Usa <code>throw</code>. Sessão 07.</p></div>
+</div>
+
+<div class="st2">Validação HTML nativa</div>
+<div class="cb"><button class="copy" onclick="cp(this)">Copiar</button><pre>
+&lt;input type="text" name="nome" <span class="ok">required</span>&gt;
+&lt;input type="email" name="email"&gt;          <span class="cm">&lt;!-- valida formato --&gt;</span>
+&lt;input type="number" name="qtd" <span class="ok">min="1" max="100"</span>&gt;
+&lt;input type="text" name="cpf" <span class="ok">maxlength="14"</span>&gt;</pre></div>
+
+<div class="st2">Validação jQuery</div>
+<div class="cb"><button class="copy" onclick="cp(this)">Copiar</button><pre>
+$('#btn-salvar').click(<span class="ok">function</span>() {
+    var erros = [];
+
+    if ($('#nome').val().trim() === '') {
+        erros.push('Nome é obrigatório');
+    }
+    if ($('#departamento').val() === '') {
+        erros.push('Selecione um departamento');
+    }
+    if (!$('input[name="aceite"]').is(':checked')) {
+        erros.push('Aceite os termos');
+    }
+
+    if (erros.length > 0) {
+        <span class="no">alert</span>('Corrija:\\n- ' + erros.join('\\n- '));
+        return false;
+    }
+});</pre></div>
+
+<div class="st2">Máscaras com jQuery Mask</div>
+<div class="cb"><button class="copy" onclick="cp(this)">Copiar</button><pre>
+<span class="cm">// Incluir jquery.mask.min.js no resources/</span>
+$('#cpf').mask('<span class="ok">000.000.000-00</span>');
+$('#cnpj').mask('<span class="ok">00.000.000/0000-00</span>');
+$('#telefone').mask('<span class="ok">(00) 00000-0000</span>');
+$('#cep').mask('<span class="ok">00000-000</span>');
+$('#valor').mask('<span class="ok">000.000.000,00</span>', {reverse: true});</pre></div>
+</section>
+
+<div class="dv"></div>
+
+<section id="codigos">
+<div class="sl">Copiar e colar</div>
+<div class="st">Snippets de referência</div>
+
+<div class="st2">Input com label (padrão obrigatório)</div>
+<div class="cb"><button class="copy" onclick="cp(this)">Copiar</button><pre>
+&lt;div class="form-group"&gt;
+    &lt;label for="nome"&gt;Nome&lt;/label&gt;
+    &lt;input type="text" class="form-control"
+           <span class="ok">id="nome" name="nome"</span>
+           placeholder="Digite o nome"&gt;
+&lt;/div&gt;</pre></div>
+
+<div class="st2">Select (dropdown)</div>
+<div class="cb"><button class="copy" onclick="cp(this)">Copiar</button><pre>
+&lt;div class="form-group"&gt;
+    &lt;label for="depto"&gt;Departamento&lt;/label&gt;
+    &lt;select class="form-control" <span class="ok">id="depto" name="departamento"</span>&gt;
+        &lt;option value=""&gt;Selecione...&lt;/option&gt;
+        &lt;option <span class="tg">value="TI"</span>&gt;Tecnologia da Informação&lt;/option&gt;
+        &lt;option <span class="tg">value="RH"</span>&gt;Recursos Humanos&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;</pre></div>
+
+<div class="st2">Radio (seleção única)</div>
+<div class="cb"><button class="copy" onclick="cp(this)">Copiar</button><pre>
+&lt;div class="form-group"&gt;
+    &lt;label&gt;Tipo de contrato&lt;/label&gt;&lt;br&gt;
+    &lt;label class="radio-inline"&gt;
+        &lt;input type="radio" <span class="ok">name="tipo_contrato" value="CLT"</span>&gt; CLT
+    &lt;/label&gt;
+    &lt;label class="radio-inline"&gt;
+        &lt;input type="radio" <span class="ok">name="tipo_contrato" value="PJ"</span>&gt; PJ
+    &lt;/label&gt;
+&lt;/div&gt;</pre></div>
+
+<div class="st2">Checkbox</div>
+<div class="cb"><button class="copy" onclick="cp(this)">Copiar</button><pre>
+&lt;div class="checkbox"&gt;
+    &lt;label&gt;
+        &lt;input type="checkbox" <span class="ok">name="aceite_termos" value="S"</span>&gt;
+        Aceito os termos e condições
+    &lt;/label&gt;
+&lt;/div&gt;</pre></div>
+
+<div class="st2">Preenchimento automático com helpers</div>
+<div class="cb"><button class="copy" onclick="cp(this)">Copiar</button><pre>
+&lt;script&gt;
+$(document).ready(function() {
+    <span class="cm">// Preencher nome do solicitante</span>
+    $('#solicitante').val(<span class="ok">WCMAPI.getUser()</span>);
+
+    <span class="cm">// Preencher data com hoje</span>
+    var hoje = new Date().toISOString().split('T')[0];
+    $('#data_solicitacao').val(hoje);
+});
+&lt;/script&gt;</pre></div>
+</section>
+
+<div class="dv"></div>
+
+<section id="trouble">
+<div class="sl">Referência rápida</div>
+<div class="st">Troubleshooting</div>
+<table>
+<thead><tr><th>Problema</th><th>Solução</th></tr></thead>
+<tbody>
+<tr><td>Campo não salva dados</td><td>Verificar atributo <code>name</code></td></tr>
+<tr><td>Select salva texto em vez de código</td><td>Verificar <code>value</code> de cada <code>&lt;option&gt;</code></td></tr>
+<tr><td>Radio não funciona como grupo</td><td>Todos do grupo com mesmo <code>name</code></td></tr>
+<tr><td>Checkbox não salva quando desmarcado</td><td>Comportamento padrão — tratar no servidor</td></tr>
+<tr><td>Campo <code>disabled</code> não salva</td><td>Usar <code>readonly</code> em vez de <code>disabled</code></td></tr>
+<tr><td>Estilo não aplica</td><td>Verificar wrapper <code>fluig-style-guide</code></td></tr>
+<tr><td>Máscara não funciona</td><td>Incluir <code>jquery.mask.min.js</code> no <code>resources/</code></td></tr>
+<tr><td>Bootstrap conflitando</td><td>Nunca importar CDN — Style Guide já inclui</td></tr>
+</tbody>
+</table>
+</section>
+
+<div class="dv"></div>
+
+<section id="links">
+<div class="sl">Recursos</div>
+<div class="st">Links úteis</div>
+<div class="lg">
+<a class="lc" href="https://tdn.totvs.com/display/public/fluig/TOTVS+FLUIG" target="_blank"><div class="li">&#128214;</div><div><h5>TDN Fluig</h5><p class="lt">Documentação oficial</p></div></a>
+<a class="lc" href="https://style.fluig.com" target="_blank"><div class="li">&#127912;</div><div><h5>Style Guide</h5><p class="lt">Componentes visuais</p></div></a>
+<a class="lc" href="https://tdn.totvs.com/pages/releaseview.action?pageId=653566687" target="_blank"><div class="li">&#128187;</div><div><h5>Dev Guide</h5><p class="lt">Guia do desenvolvedor</p></div></a>
+<a class="lc" href="https://lab.fluig.com/api-rest/" target="_blank"><div class="li">&#128279;</div><div><h5>API REST</h5><p class="lt">Referência API REST</p></div></a>
+<a class="lc" href="https://tdn.totvs.com/pages/releaseview.action?pageId=198934765" target="_blank"><div class="li">&#9881;</div><div><h5>SDK Reference</h5><p class="lt">Classes e métodos</p></div></a>
+<a class="lc" href="https://forum.fluig.com" target="_blank"><div class="li">&#128172;</div><div><h5>Fórum TOTVS</h5><p class="lt">Comunidade</p></div></a>
+</div>
+</section>
+</div>
+
+<div class="ft"><p>Treinamento Avançado Fluig — Sessão 03 de 12</p><p style="margin-top:8px"><span class="jx">* JYNX</span> — O jeito inteligente de escalar seu TOTVS</p></div>
+<button class="sb" id="sb" onclick="window.scrollTo({top:0})">&#8593;</button>
+
+<script>
+function cp(btn){var block=btn.parentElement;var pre=block.querySelector('pre');navigator.clipboard.writeText(pre.textContent).then(function(){btn.textContent='Copiado!';btn.classList.add('ok');setTimeout(function(){btn.textContent='Copiar';btn.classList.remove('ok')},2000)})}
+window.addEventListener('scroll',function(){document.getElementById('sb').classList.toggle('sh',window.scrollY>400)});
+</script>
+</body>
+</html>
