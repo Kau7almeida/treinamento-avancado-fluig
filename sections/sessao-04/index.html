@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sessão 04 — Formulários Avançados e Técnicas Dinâmicas | JYNX Fluig</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --o: #E85D04;
+            --ol: #FF8C42;
+            --og: rgba(232, 93, 4, .12);
+            --dk: #0D0D12;
+            --dk2: #14141E;
+            --dk3: #1C1C2A;
+            --dkc: #1A1A28;
+            --lt: #F8F7F4;
+            --tx: #E8E6E0;
+            --tm: #9D9B95;
+            --td: #6B6964;
+            --g: #34D399;
+            --r: #F87171;
+            --b: #60A5FA;
+            --y: #FBBF24;
+            --mono: 'JetBrains Mono', monospace;
+            --sans: 'DM Sans', sans-serif;
+            --disp: 'Playfair Display', serif;
+            --rad: 10px;
+            --radl: 16px
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--dk);
+            color: var(--tx);
+            font-family: var(--sans);
+            font-size: 16px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased
+        }
+
+        .bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(13, 13, 18, .85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(232, 93, 4, .15);
+            padding: 0 2rem;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .bar .logo {
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 2px;
+            color: var(--o)
+        }
+
+        .bar nav {
+            display: flex;
+            gap: 6px
+        }
+
+        .bar nav a {
+            color: var(--tm);
+            text-decoration: none;
+            font-size: 12px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: all .2s
+        }
+
+        .bar nav a:hover {
+            color: var(--tx);
+            background: rgba(255, 255, 255, .06)
+        }
+
+        .hero {
+            padding: 120px 2rem 60px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center
+        }
+
+        .hero .tag {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--o);
+            border: 1px solid rgba(232, 93, 4, .3);
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 20px
+        }
+
+        .hero h1 {
+            font-family: var(--disp);
+            font-size: clamp(30px, 5vw, 48px);
+            color: var(--lt);
+            line-height: 1.15;
+            margin-bottom: 16px
+        }
+
+        .hero h1 span {
+            color: var(--o)
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: var(--tm);
+            max-width: 600px;
+            margin: 0 auto
+        }
+
+        .ct {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 2rem
+        }
+
+        section {
+            padding: 55px 0
+        }
+
+        .sl {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--o);
+            margin-bottom: 8px
+        }
+
+        .st {
+            font-family: var(--disp);
+            font-size: clamp(22px, 3.5vw, 32px);
+            color: var(--lt);
+            margin-bottom: 20px;
+            line-height: 1.2
+        }
+
+        .st2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--lt);
+            margin: 28px 0 12px
+        }
+
+        .sd {
+            color: var(--tm);
+            margin-bottom: 20px;
+            font-size: 15px
+        }
+
+        code {
+            font-family: var(--mono);
+            font-size: 12px;
+            background: rgba(232, 93, 4, .15);
+            color: var(--ol);
+            padding: 2px 6px;
+            border-radius: 4px
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0;
+            font-size: 13px
+        }
+
+        th {
+            text-align: left;
+            padding: 10px 14px;
+            background: var(--dk3);
+            color: var(--o);
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 2px solid rgba(232, 93, 4, .2)
+        }
+
+        td {
+            padding: 10px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, .04);
+            color: var(--tm);
+            vertical-align: top
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, .02)
+        }
+
+        .tip {
+            background: rgba(232, 93, 4, .08);
+            border-left: 3px solid var(--o);
+            border-radius: 0 var(--rad) var(--rad) 0;
+            padding: 14px 18px;
+            margin: 18px 0;
+            font-size: 14px;
+            color: var(--tm);
+            line-height: 1.7
+        }
+
+        .tip strong {
+            color: var(--o)
+        }
+
+        .warn {
+            background: rgba(248, 113, 113, .08);
+            border-left: 3px solid var(--r);
+            border-radius: 0 var(--rad) var(--rad) 0;
+            padding: 14px 18px;
+            margin: 18px 0;
+            font-size: 14px;
+            color: var(--tm)
+        }
+
+        .warn strong {
+            color: var(--r)
+        }
+
+        .cb {
+            background: var(--dk2);
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: var(--rad);
+            padding: 18px;
+            margin: 14px 0;
+            overflow-x: auto;
+            position: relative
+        }
+
+        .cb pre {
+            font-family: var(--mono);
+            font-size: 12.5px;
+            line-height: 1.8;
+            color: var(--tm);
+            white-space: pre;
+            margin: 0
+        }
+
+        .cb .tg {
+            color: var(--o);
+            font-weight: 500
+        }
+
+        .cb .cm {
+            color: var(--td)
+        }
+
+        .cb .ok {
+            color: var(--g)
+        }
+
+        .cb .no {
+            color: var(--r)
+        }
+
+        .cb .vl {
+            color: var(--b)
+        }
+
+        .copy {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(232, 93, 4, .2);
+            border: none;
+            color: var(--ol);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background .2s;
+            z-index: 2
+        }
+
+        .copy:hover {
+            background: rgba(232, 93, 4, .4)
+        }
+
+        .copy.ok {
+            background: rgba(52, 211, 153, .2);
+            color: var(--g)
+        }
+
+        .lg {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 12px
+        }
+
+        .lc {
+            background: var(--dkc);
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: var(--rad);
+            padding: 16px 20px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all .2s
+        }
+
+        .lc:hover {
+            border-color: rgba(232, 93, 4, .3);
+            transform: translateY(-1px)
+        }
+
+        .lc .li {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: var(--og);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 16px
+        }
+
+        .lc h5 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--lt);
+            margin-bottom: 2px
+        }
+
+        .lc .lt {
+            font-size: 12px;
+            color: var(--td);
+            margin: 0
+        }
+
+        .ft {
+            text-align: center;
+            padding: 40px 2rem;
+            border-top: 1px solid rgba(255, 255, 255, .04);
+            margin-top: 40px
+        }
+
+        .ft p {
+            font-size: 13px;
+            color: var(--td)
+        }
+
+        .ft .jx {
+            color: var(--o);
+            font-weight: 700
+        }
+
+        .sb {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 40px;
+            height: 40px;
+            background: var(--o);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity .3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50
+        }
+
+        .sb.sh {
+            opacity: 1
+        }
+
+        .dv {
+            height: 1px;
+            background: rgba(255, 255, 255, .04);
+            margin: 0
+        }
+
+        @media(max-width:640px) {
+            .bar nav {
+                display: none
+            }
+
+            .hero {
+                padding: 90px 1.5rem 40px
+            }
+
+            .ct {
+                padding: 0 1.5rem
+            }
+
+            section {
+                padding: 36px 0
+            }
+
+            .lg {
+                grid-template-columns: 1fr
+            }
+
+            table {
+                font-size: 11px
+            }
+
+            th,
+            td {
+                padding: 8px 10px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bar"><span class="logo">* J Y N X</span>
+        <nav><a href="#zoom">Zoom</a><a href="#paifilho">Pai×Filho</a><a href="#lista">Lista Dinâmica</a><a
+                href="#quando">Quando usar</a><a href="#links">Links</a></nav>
+    </div>
+
+    <div class="hero">
+        <div class="tag">Sessão 04 de 12</div>
+        <h1>Formulários Avançados e <span>Técnicas Dinâmicas</span></h1>
+        <p>Zoom, AutoComplete, Pai × Filho, Select com Dataset e Listas Dinâmicas — os recursos que transformam
+            formulários simples em soluções corporativas.</p>
+    </div>
+
+    <div class="ct">
+        <div class="dv"></div>
+
+        <section id="zoom">
+            <div class="sl">Busca avançada</div>
+            <div class="st">Campo Zoom</div>
+            <p class="sd">Zoom é um campo de busca avançada com modal pesquisável. O usuário digita, a modal abre com
+                resultados de um dataset, seleciona, e os campos do formulário são preenchidos automaticamente.</p>
+
+            <div class="cb"><button class="copy" onclick="cp(this)">Copiar</button>
+                <pre>
+<span class="cm">// Configuração do Zoom</span>
+var opts = {
+    <span class="tg">source</span>: 'ds_fornecedores',          <span class="cm">// Dataset fonte</span>
+    <span class="tg">displayKey</span>: 'cod_fornecedor',       <span class="cm">// Campo exibido no input</span>
+    <span class="tg">formFieldsList</span>: [                   <span class="cm">// Mapeamento dataset → form</span>
+        { textFieldDatasetName: 'codigo', textFieldFormName: 'cod_fornecedor' },
+        { textFieldDatasetName: 'nome',   textFieldFormName: 'nome_fornecedor' },
+        { textFieldDatasetName: 'cnpj',   textFieldFormName: 'cnpj_fornecedor' }
+    ],
+    <span class="tg">tableHeader</span>: ['Código', 'Nome', 'CNPJ'],
+    <span class="tg">tableFieldsList</span>: ['codigo', 'nome', 'cnpj'],
+    <span class="tg">maxResult</span>: 10
+};
+
+<span class="ok">FLUIGC.zoom</span>('#cod_fornecedor', opts);
+
+<span class="cm">// Eventos</span>
+$('#cod_fornecedor').on('<span class="vl">fluig.zoom.itemSelect</span>', function(e, item) {
+    console.log('Selecionado:', item);
+});
+$('#cod_fornecedor').on('<span class="vl">fluig.zoom.itemRemove</span>', function(e) {
+    $('#nome_fornecedor').val('');  <span class="cm">// limpar campos</span>
+});</pre>
+            </div>
+
+            <div class="st2">AutoComplete</div>
+            <p class="sd">Irmão mais simples do Zoom — mostra sugestões inline conforme digita, sem modal.</p>
+            <div class="cb"><button class="copy" onclick="cp(this)">Copiar</button>
+                <pre>
+var opts = {
+    source: 'ds_produtos',
+    displayKey: 'descricao',
+    <span class="tg">minLength</span>: 2,   <span class="cm">// mínimo de chars para buscar</span>
+    maxResult: 10
+};
+<span class="ok">FLUIGC.autocomplete</span>('#produto', opts);</pre>
+            </div>
+        </section>
+
+        <div class="dv"></div>
+
+        <section id="paifilho">
+            <div class="sl">Cascateamento</div>
+            <div class="st">Técnica Pai × Filho</div>
+            <p class="sd">Selecionar um campo (pai) filtra automaticamente as opções de outro (filho). Exemplo: Estado →
+                Cidade, Departamento → Setor, Categoria → Subcategoria.</p>
+
+            <div class="cb"><button class="copy" onclick="cp(this)">Copiar</button>
+                <pre>
+$('#estado').change(function() {
+    var uf = $(this).val();
+    var $cidade = $('#cidade');
+
+    <span class="no">$cidade.empty();</span>  <span class="cm">// OBRIGATÓRIO: limpar opções anteriores!</span>
+
+    if (!uf) {
+        $cidade.append('&lt;option value=""&gt;Selecione o estado primeiro...&lt;/option&gt;');
+        $cidade.prop('disabled', true);
+        return;
+    }
+
+    <span class="cm">// Buscar cidades via dataset com filtro</span>
+    var constraints = [];
+    constraints.push(
+        DatasetFactory.createConstraint("<span class="tg">uf</span>", uf, uf, ConstraintType.MUST)
+    );
+    var dados = DatasetFactory.getDataset("ds_cidades", null, constraints, null);
+
+    $cidade.append('&lt;option value=""&gt;Selecione...&lt;/option&gt;');
+    for (var i = 0; i &lt; dados.values.length; i++) {
+        $cidade.append(
+            '&lt;option value="' + dados.getValue(i, "codigo") + '"&gt;' +
+            dados.getValue(i, "nome") + '&lt;/option&gt;'
+        );
+    }
+    <span class="ok">$cidade.prop('disabled', false);</span>  <span class="cm">// Habilitar</span>
+});</pre>
+            </div>
+
+            <div class="warn"><strong>Bug clássico:</strong> Não limpar o campo filho quando o pai muda. Resultado: o
+                usuário seleciona "Rio de Janeiro" mas a cidade ainda mostra "Campinas" (de São Paulo). Sempre use
+                <code>$filho.empty()</code> antes de popular.</div>
+        </section>
+
+        <div class="dv"></div>
+
+        <section id="selectds">
+            <div class="sl">Combos dinâmicos</div>
+            <div class="st">Select com Dataset</div>
+            <div class="cb"><button class="copy" onclick="cp(this)">Copiar</button>
+                <pre>
+$(document).ready(function() {
+    var constraints = [];
+    var dados = DatasetFactory.getDataset("ds_departamentos", null, constraints, null);
+
+    var $select = $('#departamento');
+    <span class="no">$select.empty();</span>
+    $select.append('&lt;option value=""&gt;Selecione...&lt;/option&gt;');
+
+    for (var i = 0; i &lt; dados.values.length; i++) {
+        $select.append(
+            '&lt;option value="' + dados.getValue(i, "<span class="tg">codigo</span>") + '"&gt;' +
+            dados.getValue(i, "<span class="tg">nome</span>") + '&lt;/option&gt;'
+        );
+    }
+});</pre>
+            </div>
+        </section>
+
+        <div class="dv"></div>
+
+        <section id="lista">
+            <div class="sl">Tabela filha</div>
+            <div class="st">Listas Dinâmicas</div>
+            <p class="sd">Tabelas onde o usuário adiciona e remove linhas. Usa a convenção dos 3 underscores
+                (<code>___</code>) para criar tabela filha automática no banco.</p>
+
+            <div class="tip"><strong>Convenção <code>___</code> (3 underscores):</strong>
+                <code>name="item_descricao___1"</code> = linha 1, coluna descricao.
+                <code>name="item_descricao___2"</code> = linha 2. O Fluig cria a tabela filha automaticamente no banco
+                de dados.</div>
+
+            <div class="st2">HTML da tabela</div>
+            <div class="cb"><button class="copy" onclick="cp(this)">Copiar</button>
+                <pre>
+&lt;table class="table table-striped" id="tabela-itens"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;#&lt;/th&gt;&lt;th&gt;Descrição&lt;/th&gt;&lt;th&gt;Qtd&lt;/th&gt;
+      &lt;th&gt;Valor&lt;/th&gt;&lt;th&gt;Subtotal&lt;/th&gt;&lt;th&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody id="corpo-tabela"&gt;
+    &lt;tr class="linha-item" data-linha="1"&gt;
+      &lt;td class="num-linha"&gt;1&lt;/td&gt;
+      &lt;td&gt;&lt;input class="form-control input-sm"
+               <span class="tg">name="item_descricao___1"</span>&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;input class="form-control input-sm campo-qtd"
+               <span class="tg">name="item_quantidade___1"</span> value="1"&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;input class="form-control input-sm campo-valor"
+               <span class="tg">name="item_valor___1"</span>&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;input class="form-control input-sm campo-subtotal"
+               <span class="tg">name="item_subtotal___1"</span> readonly&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;button class="btn btn-danger btn-xs btn-remover"&gt;&#10005;&lt;/button&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</pre>
+            </div>
+
+            <div class="st2">Adicionar linha</div>
+            <div class="cb"><button class="copy" onclick="cp(this)">Copiar</button>
+                <pre>
+var contador = 1;
+$('#btn-adicionar').click(function() {
+    contador++;
+    var nova = '&lt;tr class="linha-item" data-linha="' + contador + '"&gt;' +
+        '&lt;td class="num-linha"&gt;' + contador + '&lt;/td&gt;' +
+        '&lt;td&gt;&lt;input class="form-control input-sm" ' +
+        '<span class="tg">name="item_descricao___' + contador + '"</span>&gt;&lt;/td&gt;' +
+        '&lt;td&gt;&lt;input class="form-control input-sm campo-qtd" ' +
+        '<span class="tg">name="item_quantidade___' + contador + '"</span> value="1"&gt;&lt;/td&gt;' +
+        '&lt;td&gt;&lt;input class="form-control input-sm campo-valor" ' +
+        '<span class="tg">name="item_valor___' + contador + '"</span>&gt;&lt;/td&gt;' +
+        '&lt;td&gt;&lt;input class="form-control input-sm campo-subtotal" ' +
+        '<span class="tg">name="item_subtotal___' + contador + '"</span> readonly&gt;&lt;/td&gt;' +
+        '&lt;td&gt;&lt;button class="btn btn-danger btn-xs btn-remover"&gt;&#10005;&lt;/button&gt;&lt;/td&gt;' +
+    '&lt;/tr&gt;';
+    $('#corpo-tabela').append(nova);
+});</pre>
+            </div>
+
+            <div class="st2">Remover + Reindexar</div>
+            <div class="cb"><button class="copy" onclick="cp(this)">Copiar</button>
+                <pre>
+<span class="cm">// Remover</span>
+$(document).on('click', '.btn-remover', function() {
+    if ($('.linha-item').length &lt;= 1) {
+        alert('Mínimo 1 item');
+        return;
+    }
+    $(this).closest('tr').remove();
+    <span class="no">reindexarLinhas();</span>  <span class="cm">// OBRIGATÓRIO!</span>
+});
+
+<span class="cm">// Reindexar (corrigir ___N após remoção)</span>
+function <span class="ok">reindexarLinhas</span>() {
+    $('.linha-item').each(function(index) {
+        var num = index + 1;
+        $(this).find('.num-linha').text(num);
+        $(this).find('input[name^="item_descricao___"]')
+               .attr('name', 'item_descricao___' + num);
+        $(this).find('input[name^="item_quantidade___"]')
+               .attr('name', 'item_quantidade___' + num);
+        $(this).find('input[name^="item_valor___"]')
+               .attr('name', 'item_valor___' + num);
+        $(this).find('input[name^="item_subtotal___"]')
+               .attr('name', 'item_subtotal___' + num);
+    });
+    contador = $('.linha-item').length;
+}</pre>
+            </div>
+
+            <div class="st2">Cálculo automático</div>
+            <div class="cb"><button class="copy" onclick="cp(this)">Copiar</button>
+                <pre>
+<span class="cm">// Subtotal por linha (qtd × valor)</span>
+$(document).on('change keyup', '.campo-qtd, .campo-valor', function() {
+    var $linha = $(this).closest('tr');
+    var qtd = parseFloat($linha.find('.campo-qtd').val()) || 0;
+    var valorStr = $linha.find('.campo-valor').val() || '0';
+    var valor = parseFloat(valorStr<span class="tg">.replace(/\./g,'').replace(',','.')</span>) || 0;
+    var subtotal = qtd * valor;
+    $linha.find('.campo-subtotal').val(
+        subtotal.toLocaleString('pt-BR', {minimumFractionDigits:2})
+    );
+    calcularTotal();
+});
+
+<span class="cm">// Total geral</span>
+function <span class="ok">calcularTotal</span>() {
+    var total = 0;
+    $('.campo-subtotal').each(function() {
+        var str = $(this).val() || '0';
+        total += parseFloat(str.replace(/\./g,'').replace(',','.')) || 0;
+    });
+    $('#total_geral').val(
+        total.toLocaleString('pt-BR', {minimumFractionDigits:2})
+    );
+}</pre>
+            </div>
+        </section>
+
+        <div class="dv"></div>
+
+        <section id="quando">
+            <div class="sl">Decisão</div>
+            <div class="st">Quando usar o quê?</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cenário</th>
+                        <th>Componente</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2-4 opções fixas (Sim/Não, prioridade)</td>
+                        <td>Radio</td>
+                    </tr>
+                    <tr>
+                        <td>5-50 opções estáticas</td>
+                        <td>Select fixo no HTML</td>
+                    </tr>
+                    <tr>
+                        <td>5-50 opções que podem mudar</td>
+                        <td>Select com Dataset</td>
+                    </tr>
+                    <tr>
+                        <td>50+ opções (fornecedores, produtos)</td>
+                        <td>Zoom</td>
+                    </tr>
+                    <tr>
+                        <td>Busca rápida com sugestão</td>
+                        <td>AutoComplete</td>
+                    </tr>
+                    <tr>
+                        <td>Campos dependentes (Estado→Cidade)</td>
+                        <td>Pai × Filho</td>
+                    </tr>
+                    <tr>
+                        <td>Múltiplos registros (itens do pedido)</td>
+                        <td>Lista Dinâmica</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div class="dv"></div>
+
+        <section id="trouble">
+            <div class="sl">Referência rápida</div>
+            <div class="st">Troubleshooting</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Problema</th>
+                        <th>Solução</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Zoom abre modal vazia</td>
+                        <td>Verificar nome do dataset (case sensitive)</td>
+                    </tr>
+                    <tr>
+                        <td>Zoom não preenche campos</td>
+                        <td>Conferir <code>formFieldsList</code> (dataset → form)</td>
+                    </tr>
+                    <tr>
+                        <td>Pai×Filho: valor antigo persiste</td>
+                        <td>Adicionar <code>$filho.empty()</code> antes de popular</td>
+                    </tr>
+                    <tr>
+                        <td>Select mostra "Carregando..."</td>
+                        <td>Dataset não carregou — ver console F12</td>
+                    </tr>
+                    <tr>
+                        <td>Lista perde dados ao salvar</td>
+                        <td>Verificar padrão <code>nome___N</code></td>
+                    </tr>
+                    <tr>
+                        <td>Lista após remover: dados trocados</td>
+                        <td>Chamar <code>reindexarLinhas()</code> após remover</td>
+                    </tr>
+                    <tr>
+                        <td>Cálculo retorna NaN</td>
+                        <td>Converter moeda: <code>replace('.','').replace(',','.')</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div class="dv"></div>
+
+        <section id="links">
+            <div class="sl">Recursos</div>
+            <div class="st">Links úteis</div>
+            <div class="lg">
+                <a class="lc" href="https://tdn.totvs.com/display/public/fluig/TOTVS+FLUIG" target="_blank">
+                    <div class="li">&#128214;</div>
+                    <div>
+                        <h5>TDN Fluig</h5>
+                        <p class="lt">Documentação oficial</p>
+                    </div>
+                </a>
+                <a class="lc" href="https://style.fluig.com" target="_blank">
+                    <div class="li">&#127912;</div>
+                    <div>
+                        <h5>Style Guide</h5>
+                        <p class="lt">Componentes visuais</p>
+                    </div>
+                </a>
+                <a class="lc" href="https://tdn.totvs.com/pages/releaseview.action?pageId=653566687" target="_blank">
+                    <div class="li">&#128187;</div>
+                    <div>
+                        <h5>Dev Guide</h5>
+                        <p class="lt">Guia do desenvolvedor</p>
+                    </div>
+                </a>
+                <a class="lc" href="https://lab.fluig.com/api-rest/" target="_blank">
+                    <div class="li">&#128279;</div>
+                    <div>
+                        <h5>API REST</h5>
+                        <p class="lt">Referência API REST</p>
+                    </div>
+                </a>
+                <a class="lc" href="https://tdn.totvs.com/pages/releaseview.action?pageId=198934765" target="_blank">
+                    <div class="li">&#9881;</div>
+                    <div>
+                        <h5>SDK Reference</h5>
+                        <p class="lt">Classes e métodos</p>
+                    </div>
+                </a>
+                <a class="lc" href="https://forum.fluig.com" target="_blank">
+                    <div class="li">&#128172;</div>
+                    <div>
+                        <h5>Fórum TOTVS</h5>
+                        <p class="lt">Comunidade</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <div class="ft">
+        <p>Treinamento Avançado Fluig — Sessão 04 de 12</p>
+        <p style="margin-top:8px"><span class="jx">* JYNX</span> — O jeito inteligente de escalar seu TOTVS</p>
+    </div>
+    <button class="sb" id="sb" onclick="window.scrollTo({top:0})">&#8593;</button>
+
+    <script>
+        function cp(btn) { var block = btn.parentElement; var pre = block.querySelector('pre'); navigator.clipboard.writeText(pre.textContent).then(function () { btn.textContent = 'Copiado!'; btn.classList.add('ok'); setTimeout(function () { btn.textContent = 'Copiar'; btn.classList.remove('ok') }, 2000) }) }
+        window.addEventListener('scroll', function () { document.getElementById('sb').classList.toggle('sh', window.scrollY > 400) });
+    </script>
+</body>
+
+</html>

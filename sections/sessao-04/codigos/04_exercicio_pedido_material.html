@@ -1,0 +1,155 @@
+<!--
+    06_exercicio_pedido_material.html
+    Sessão 04 — Template para o exercício (Pedido de Material)
+    Treinamento Avançado | JYNX
+
+    A estrutura está pronta. O aluno precisa implementar:
+    1. Select de departamento populado via dataset
+    2. Configuração do Zoom de fornecedor
+    3. Lógica de adicionar/remover linhas
+    4. Cálculo de subtotal e total
+-->
+
+<div class="fluig-style-guide" style="padding: 20px;">
+
+    <div class="alert alert-info">
+        <strong>Exercício:</strong> Complete a lógica deste formulário de Pedido de Material.
+    </div>
+
+    <!-- PAINEL 1: Dados do Solicitante -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Dados do Solicitante</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="solicitante">Solicitante</label>
+                        <input type="text" class="form-control" id="solicitante" name="solicitante" readonly>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="departamento">Departamento</label>
+                        <!-- TODO: Popular via dataset -->
+                        <select class="form-control" id="departamento" name="departamento">
+                            <option value="">Carregando...</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="data_pedido">Data do Pedido</label>
+                        <input type="date" class="form-control" id="data_pedido" name="data_pedido">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAINEL 2: Fornecedor (Zoom) -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Fornecedor</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="cod_fornecedor">Código</label>
+                        <!-- TODO: Configurar Zoom -->
+                        <input type="text" class="form-control" id="cod_fornecedor" name="cod_fornecedor"
+                            placeholder="Buscar fornecedor...">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="nome_fornecedor">Nome</label>
+                        <input type="text" class="form-control" id="nome_fornecedor" name="nome_fornecedor" readonly>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="cnpj_fornecedor">CNPJ</label>
+                        <input type="text" class="form-control" id="cnpj_fornecedor" name="cnpj_fornecedor" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAINEL 3: Itens (Lista Dinâmica) -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Itens do Pedido
+                <button type="button" class="btn btn-primary btn-sm pull-right" id="btn-adicionar">
+                    + Adicionar Item
+                </button>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped" id="tabela-itens">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Descrição</th>
+                        <th>Qtd</th>
+                        <th>Valor Unit.</th>
+                        <th>Subtotal</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="corpo-tabela">
+                    <!-- TODO: Implementar a primeira linha com campos ___1 -->
+                    <tr class="linha-item" data-linha="1">
+                        <td class="num-linha">1</td>
+                        <td><input type="text" class="form-control input-sm" name="item_descricao___1"
+                                placeholder="Descrição"></td>
+                        <td><input type="number" class="form-control input-sm campo-qtd" name="item_quantidade___1"
+                                value="1" min="1" style="width:80px"></td>
+                        <td><input type="text" class="form-control input-sm campo-valor" name="item_valor___1"
+                                placeholder="0,00" style="width:120px"></td>
+                        <td><input type="text" class="form-control input-sm campo-subtotal" name="item_subtotal___1"
+                                readonly value="0,00" style="width:120px"></td>
+                        <td><button type="button" class="btn btn-danger btn-xs btn-remover">&#10005;</button></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" class="text-right"><strong>Total:</strong></td>
+                        <td>
+                            <input type="text" class="form-control input-sm" id="total_geral" name="total_geral"
+                                readonly value="0,00" style="font-weight:bold;width:120px">
+                        </td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <!-- BOTÕES -->
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button type="button" class="btn btn-default">Cancelar</button>
+            <button type="button" class="btn btn-primary" id="btn-salvar">Salvar Pedido</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        // TODO 1: Preencher solicitante com WCMAPI.getUser()
+        // TODO 2: Preencher data com hoje
+        // TODO 3: Popular select departamento via dataset
+        // TODO 4: Configurar Zoom de fornecedor
+        // TODO 5: Implementar adicionar/remover linhas
+        // TODO 6: Implementar cálculo de subtotal e total
+        // TODO 7: Validação ao salvar
+
+        // Dica: consulte os arquivos 01 a 05 desta sessão como referência!
+    });
+</script>

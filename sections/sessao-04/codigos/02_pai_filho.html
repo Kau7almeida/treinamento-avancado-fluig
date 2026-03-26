@@ -1,0 +1,170 @@
+<!--
+    03_pai_filho.html
+    Sessão 04 — Técnica Pai × Filho (cascateamento de selects)
+    Treinamento Avançado | JYNX
+
+    Pai × Filho: selecionar um campo (pai) filtra as opções de outro (filho).
+    Exemplo clássico: Estado → Cidade
+-->
+
+<div class="fluig-style-guide" style="padding: 20px;">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Pai × Filho — Estado e Cidade</h3>
+        </div>
+        <div class="panel-body">
+
+            <div class="row">
+                <!-- PAI: Estado -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="estado">Estado (Pai)</label>
+                        <select class="form-control"
+                                id="estado" name="estado">
+                            <option value="">Selecione o estado...</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PR">Paraná</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- FILHO: Cidade (carregado dinamicamente) -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="cidade">Cidade (Filho)</label>
+                        <select class="form-control"
+                                id="cidade" name="cidade"
+                                disabled>
+                            <option value="">Selecione o estado primeiro...</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="alert alert-info">
+        <strong>Fluxo:</strong> Selecione um estado → as cidades são carregadas automaticamente
+        → o campo cidade é habilitado → selecione a cidade.
+    </div>
+
+</div>
+
+<script>
+$(document).ready(function() {
+
+    // =====================================================
+    // DADOS MOCK (em produção, viria de um dataset)
+    // =====================================================
+    var cidadesPorEstado = {
+        'SP': [
+            { valor: 'sao_paulo', texto: 'São Paulo' },
+            { valor: 'campinas', texto: 'Campinas' },
+            { valor: 'santos', texto: 'Santos' },
+            { valor: 'sorocaba', texto: 'Sorocaba' },
+            { valor: 'ribeirao_preto', texto: 'Ribeirão Preto' }
+        ],
+        'RJ': [
+            { valor: 'rio_de_janeiro', texto: 'Rio de Janeiro' },
+            { valor: 'niteroi', texto: 'Niterói' },
+            { valor: 'petropolis', texto: 'Petrópolis' },
+            { valor: 'volta_redonda', texto: 'Volta Redonda' }
+        ],
+        'MG': [
+            { valor: 'belo_horizonte', texto: 'Belo Horizonte' },
+            { valor: 'uberlandia', texto: 'Uberlândia' },
+            { valor: 'juiz_de_fora', texto: 'Juiz de Fora' },
+            { valor: 'contagem', texto: 'Contagem' }
+        ],
+        'PR': [
+            { valor: 'curitiba', texto: 'Curitiba' },
+            { valor: 'londrina', texto: 'Londrina' },
+            { valor: 'maringa', texto: 'Maringá' },
+            { valor: 'cascavel', texto: 'Cascavel' }
+        ]
+    };
+
+    // =====================================================
+    // EVENTO onChange DO PAI (Estado)
+    // =====================================================
+    $('#estado').change(function() {
+        var estadoSelecionado = $(this).val();
+        var $selectCidade = $('#cidade');
+
+        // PASSO 1: Limpar o campo filho (OBRIGATÓRIO!)
+        // Sem isso, a cidade anterior permanece selecionada → BUG
+        $selectCidade.empty();
+
+        if (estadoSelecionado === '') {
+            // Nenhum estado selecionado → desabilitar cidade
+            $selectCidade.append('<option value="">Selecione o estado primeiro...</option>');
+            $selectCidade.prop('disabled', true);
+            return;
+        }
+
+        // PASSO 2: Buscar cidades do estado selecionado
+        // Em produção, seria:
+        // var constraints = [DatasetFactory.createConstraint("estado", estadoSelecionado, estadoSelecionado, ConstraintType.MUST)];
+        // var dados = DatasetFactory.getDataset("ds_cidades", null, constraints, null);
+
+        var cidades = cidadesPorEstado[estadoSelecionado] || [];
+
+        // PASSO 3: Popular o select filho com os resultados
+        $selectCidade.append('<option value="">Selecione a cidade...</option>');
+        for (var i = 0; i < cidades.length; i++) {
+            $selectCidade.append(
+                '<option value="' + cidades[i].valor + '">' +
+                cidades[i].texto +
+                '</option>'
+            );
+        }
+
+        // PASSO 4: Habilitar o campo filho
+        $selectCidade.prop('disabled', false);
+    });
+
+});
+</script>
+
+<!--
+    VERSÃO COM DATASET REAL (usar quando tiver o dataset):
+
+    $('#estado').change(function() {
+        var uf = $(this).val();
+        var $cidade = $('#cidade');
+        $cidade.empty();
+
+        if (!uf) {
+            $cidade.append('<option value="">Selecione o estado primeiro...</option>');
+            $cidade.prop('disabled', true);
+            return;
+        }
+
+        var constraints = [];
+        constraints.push(
+            DatasetFactory.createConstraint("uf", uf, uf, ConstraintType.MUST)
+        );
+
+        var dados = DatasetFactory.getDataset("ds_cidades", null, constraints, null);
+
+        $cidade.append('<option value="">Selecione a cidade...</option>');
+        for (var i = 0; i < dados.values.length; i++) {
+            $cidade.append(
+                '<option value="' + dados.getValue(i, "codigo") + '">' +
+                dados.getValue(i, "nome") +
+                '</option>'
+            );
+        }
+        $cidade.prop('disabled', false);
+    });
+
+    PONTOS CRÍTICOS:
+    1. SEMPRE limpar o filho antes de popular (empty)
+    2. SEMPRE desabilitar o filho quando pai está vazio
+    3. Usar constraints para filtrar no SERVIDOR (não trazer tudo e filtrar no JS)
+    4. Se o dataset for grande, considerar AutoComplete em vez de select
+-->

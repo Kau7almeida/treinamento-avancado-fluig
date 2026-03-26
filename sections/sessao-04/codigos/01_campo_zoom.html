@@ -1,0 +1,132 @@
+<!--
+    01_campo_zoom.html
+    Sessão 04 — Campo Zoom (busca avançada com modal)
+    Treinamento Avançado | JYNX
+
+    O Zoom é o componente de busca avançada do Fluig.
+    Abre uma modal com resultados filtráveis de um dataset.
+    Ao selecionar, preenche campos do formulário automaticamente.
+-->
+
+<div class="fluig-style-guide" style="padding: 20px;">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Seleção com Zoom</h3>
+        </div>
+        <div class="panel-body">
+
+            <div class="row">
+                <!-- Campo Zoom: Fornecedor -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="cod_fornecedor">Código do Fornecedor</label>
+                        <!-- O input principal do Zoom -->
+                        <input type="text" class="form-control" id="cod_fornecedor" name="cod_fornecedor"
+                            placeholder="Clique na lupa para buscar">
+                    </div>
+                </div>
+                <!-- Campo preenchido automaticamente pelo Zoom -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="nome_fornecedor">Nome do Fornecedor</label>
+                        <input type="text" class="form-control" id="nome_fornecedor" name="nome_fornecedor" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Mais campos preenchidos pelo Zoom -->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="cnpj_fornecedor">CNPJ</label>
+                        <input type="text" class="form-control" id="cnpj_fornecedor" name="cnpj_fornecedor" readonly>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="cidade_fornecedor">Cidade</label>
+                        <input type="text" class="form-control" id="cidade_fornecedor" name="cidade_fornecedor"
+                            readonly>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // =====================================================
+    // CONFIGURAÇÃO DO ZOOM — roda no BROWSER
+    // =====================================================
+    $(document).ready(function () {
+
+        // Configuração do componente Zoom
+        var opts = {
+            source: 'ds_fornecedores',       // Nome do dataset fonte
+            displayKey: 'cod_fornecedor',     // Campo exibido no input
+            formFieldsList: [                 // Mapeamento: dataset → formulário
+                // { campo_do_dataset : campo_do_formulario }
+                { textFieldDatasetName: 'cod_fornecedor', textFieldFormName: 'cod_fornecedor' },
+                { textFieldDatasetName: 'nome_fornecedor', textFieldFormName: 'nome_fornecedor' },
+                { textFieldDatasetName: 'cnpj', textFieldFormName: 'cnpj_fornecedor' },
+                { textFieldDatasetName: 'cidade', textFieldFormName: 'cidade_fornecedor' }
+            ],
+            tableHeader: [                    // Colunas visíveis na modal
+                'Código', 'Nome', 'CNPJ', 'Cidade'
+            ],
+            tableFieldsList: [                // Campos exibidos na modal
+                'cod_fornecedor', 'nome_fornecedor', 'cnpj', 'cidade'
+            ],
+            maxResult: 10                     // Máximo de resultados por página
+        };
+
+        // Ativar o Zoom no campo
+        // FLUIGC é o namespace dos componentes do Style Guide
+        FLUIGC.zoom('#cod_fornecedor', opts);
+
+        // =====================================================
+        // EVENTO: Quando o usuário seleciona um item no Zoom
+        // =====================================================
+        $('#cod_fornecedor').on('fluig.zoom.itemSelect', function (event, selectedItem) {
+            // selectedItem contém os dados do registro selecionado
+            console.log('Fornecedor selecionado:', selectedItem);
+        });
+
+        // =====================================================
+        // EVENTO: Quando o usuário limpa o Zoom
+        // =====================================================
+        $('#cod_fornecedor').on('fluig.zoom.itemRemove', function (event) {
+            // Limpar campos dependentes
+            $('#nome_fornecedor').val('');
+            $('#cnpj_fornecedor').val('');
+            $('#cidade_fornecedor').val('');
+        });
+
+    });
+</script>
+
+<!--
+    PONTOS PARA EXPLICAR NO LIVE CODING:
+
+    1. O Zoom consulta um DATASET como fonte de dados
+       → ds_fornecedores precisa existir e estar deployado
+
+    2. formFieldsList mapeia campos do dataset para campos do formulário
+       → textFieldDatasetName = nome da coluna no dataset
+       → textFieldFormName = atributo name/id do campo HTML
+
+    3. tableHeader + tableFieldsList definem o que aparece na modal
+       → O usuário vê essas colunas na janela de busca
+
+    4. O evento fluig.zoom.itemSelect dispara quando o usuário seleciona
+       → Útil para lógica adicional (ex: calcular algo após seleção)
+
+    5. maxResult controla paginação
+       → Com 10.000 registros, sem maxResult = modal trava
+
+    NOTA: Se o dataset ds_fornecedores não existir no ambiente,
+    crie um dataset mock simples com dados fixos (ver sessão 09).
+-->
